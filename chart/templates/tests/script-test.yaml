@@ -1,4 +1,4 @@
-{{- if .Values.bbtests.scripts.enabled }}
+{{- if default false (default dict .Values.bbtests.scripts).enabled }}
 {{- include "gluon.tests.script-configmap.base" .}}
 ---
 {{- include "gluon.tests.script-runner.base" .}}
