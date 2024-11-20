@@ -1,0 +1,26 @@
+{{- if and .Values.istio.enabled .Values.istio.hardened.enabled .Values.istio.headlamp.enabled -}}
+{{- $dot := . }}
+{{- range .Values.istio.headlamp.gateways -}}
+{{- $gatewayParts := split "/" . }}
+{{- $namespace := $gatewayParts._0 }}
+{{- $name := $gatewayParts._1 }}
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: {{ $name }}-ingress-gateway-authz-policy
+  namespace: {{ $.Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "headlamp.selectorLabels" $dot | nindent 6 }}
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - {{ $namespace }}
+        principals:
+        - "cluster.local/ns/{{ $namespace }}/sa/{{ $name }}-ingress-gateway-service-account"
+---
+{{ end -}}
+{{- end }}
