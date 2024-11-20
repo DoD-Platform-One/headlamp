@@ -1,45 +1,42 @@
 # -- Domain used for BigBang created exposed services
 domain: dev.bigbang.mil
 # -- Toggle istio integration. Intended to be controlled via BigBang passthrough of istio package status
-istio:
-  enabled: false
-  # -- Default peer authentication values
-  hardened:
-    enabled: false
-    outboundTrafficPolicyMode: "REGISTRY_ONLY"
-    customServiceEntries: []
-      # - name: "allow-google"
-      #   enabled: true
-      #   spec:
-      #     hosts:
-      #       - google.com
-      #     location: MESH_EXTERNAL
-      #     ports:
-      #       - number: 443
-      #         protocol: TLS
-      #         name: https
-      #     resolution: DNS
-    customAuthorizationPolicies: []
-    # - name: "allow-nothing"
-    #   enabled: true
-    #   spec: {}
-  mtls:
-    # -- STRICT = Allow only mutual TLS traffic,
-    # PERMISSIVE = Allow both plain text and mutual TLS traffic
-    mode: STRICT
-  # -- Headlamp UI specific VirtualService values
-  headlamp:
-    # -- Toggle VirtualService creation
-    enabled: true
-    annotations: {}
-    labels: {}
-    gateways:
-      - istio-system/main
-    hosts:
-      - headlamp.{{ .Values.domain }}
-
-networkPolicies:
-  enabled: true
+# istio:
+#   enabled: false
+#   # -- Default peer authentication values
+#   hardened:
+#     enabled: false
+#     outboundTrafficPolicyMode: "REGISTRY_ONLY"
+#     customServiceEntries: []
+#       # - name: "allow-google"
+#       #   enabled: true
+#       #   spec:
+#       #     hosts:
+#       #       - google.com
+#       #     location: MESH_EXTERNAL
+#       #     ports:
+#       #       - number: 443
+#       #         protocol: TLS
+#       #         name: https
+#       #     resolution: DNS
+#     customAuthorizationPolicies: []
+#     # - name: "allow-nothing"
+#     #   enabled: true
+#     #   spec: {}
+#   mtls:
+#     # -- STRICT = Allow only mutual TLS traffic,
+#     # PERMISSIVE = Allow both plain text and mutual TLS traffic
+#     mode: STRICT
+#   # -- Headlamp UI specific VirtualService values
+#   headlamp:
+#     # -- Toggle VirtualService creation
+#     enabled: true
+#     annotations: {}
+#     labels: {}
+#     gateways:
+#       - istio-system/main
+#     hosts:
+#       - headlamp.{{ .Values.domain }}
 
 image:
   # -- Container image registry

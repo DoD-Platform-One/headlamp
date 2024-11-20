@@ -1,4 +1,4 @@
-{{- if .Values.openshift }}
+{{- if default false .Values.openshift }}
 apiVersion: k8s.cni.cncf.io/v1
 kind: NetworkAttachmentDefinition
 metadata:
