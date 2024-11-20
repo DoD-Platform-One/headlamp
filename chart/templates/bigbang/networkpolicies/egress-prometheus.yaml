@@ -1,4 +1,4 @@
-{{- if and (default true (default dict .Values.networkPolicies).enabled) (default false (default dict .Values.monitoring).enabled) }}
+{{- if and (default false (default dict .Values.networkPolicies).enabled) (default false (default dict .Values.monitoring).enabled) }}
 # Allow Traffic to authservice
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

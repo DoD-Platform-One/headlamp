@@ -1,4 +1,4 @@
-{{- if and (default true (default dict .Values.networkPolicies).enabled) (default false (default dict .Values.istio).enabled) }}
+{{- if and (default false (default dict .Values.networkPolicies).enabled) (default false (default dict .Values.istio).enabled) }}
 # Allow traffic from the IngressGateway to the Headlamp UI
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy

@@ -1,5 +1,5 @@
 {{- /* Adds additional network policies based on values */ -}}
-{{- if (default true (default dict .Values.networkPolicies).enabled) -}}
+{{- if (default false (default dict .Values.networkPolicies).enabled) -}}
   {{- range $policy := (default nil .Values.networkPolicies.additionalPolicies) -}}
     {{- if $policy }}
 apiVersion: networking.k8s.io/v1
