@@ -38,6 +38,9 @@ istio:
     hosts:
       - headlamp.{{ .Values.domain }}
 
+networkPolicies:
+  enabled: true
+
 image:
   # -- Container image registry
   registry: ghcr.io
