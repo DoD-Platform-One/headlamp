@@ -1,5 +1,5 @@
 {{- /* Render Istio Auth policies */ -}}
-{{- if and (default false .Values.istio.enabled) (default false .Values.istio.hardened.enabled) -}}
+{{- if and (default false (default dict .Values.istio).enabled) (default false (default dict .Values.istio.hardened).enabled) -}}
 {{- range $.Values.istio.hardened.customAuthorizationPolicies -}}
 {{- if .enabled -}}
 apiVersion: security.istio.io/v1
