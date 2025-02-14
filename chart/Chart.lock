@@ -1,7 +1,4 @@
 dependencies:
-- name: headlamp
-  repository: https://headlamp-k8s.github.io/headlamp/
-  version: 0.26.0
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
   version: 0.5.9

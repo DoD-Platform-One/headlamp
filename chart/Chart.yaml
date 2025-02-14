@@ -1,24 +1,37 @@
 apiVersion: v2
 name: headlamp
 description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
-version: 0.26.0-bb.0
-appVersion: 0.26.0
+version: 0.28.0-bb.0
+appVersion: 0.28.0
 type: application
 home: https://headlamp.dev/
 icon: https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/docs/headlamp_light.svg
+keywords:
+  - kubernetes
+  - plugins
+  - kinvolk
+  - headlamp
+  - dashboard
+  - ui
+  - web
+  - monitoring
+  - logging
+sources:
+  - https://github.com/headlamp-k8s/headlamp/tree/main/charts/headlamp
+  - https://github.com/headlamp-k8s/headlamp
+maintainers:
+  - name: kinvolk
+    url: https://kinvolk.io/
 annotations:
   bigbang.dev/applicationVersions: |
-    - Headlamp: 0.26.0
+    - Headlamp: 0.28.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find upstream chart's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
     - [Find upstream applications's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
   helm.sh/images: |
     - name: headlamp
-      image: ghcr.io/headlamp-k8s/headlamp:v0.26.0
+      image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.28.0
 dependencies:
-  - name: headlamp
-    version: "0.26.0"
-    repository: https://headlamp-k8s.github.io/headlamp/
   - name: gluon
     version: "0.5.9"
     repository: oci://registry1.dso.mil/bigbang
