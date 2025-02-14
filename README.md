@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.26.0-bb.0](https://img.shields.io/badge/Version-0.26.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.26.0](https://img.shields.io/badge/AppVersion-0.26.0-informational?style=flat-square)
+![Version: 0.28.0-bb.0](https://img.shields.io/badge/Version-0.28.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.28.0](https://img.shields.io/badge/AppVersion-0.28.0-informational?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -53,7 +53,7 @@ helm install headlamp chart/
 | image.registry | string | `"ghcr.io"` | Container image registry |
 | image.repository | string | `"headlamp-k8s/headlamp"` | Container image name |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. One of Always, Never, IfNotPresent |
-| image.tag | string | `""` | Container image tag, If "" uses appVersion in Chart.yaml |
+| image.tag | string | `"v0.28.0"` | Container image tag, If "" uses appVersion in Chart.yaml |
 
 ## Contributing
 
