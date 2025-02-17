@@ -1,0 +1,14 @@
+{{- /* Adds additional network policies based on values */ -}}
+{{- if (default false (default dict .Values.networkPolicies).enabled) -}}
+  {{- range $policy := (default nil .Values.networkPolicies.additionalPolicies) -}}
+    {{- if $policy }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ $policy.name }}
+spec:
+  {{ tpl ($policy.spec | toYaml) $ | nindent 2 }}
+---
+    {{- end }}
+  {{- end }}
+{{- end }}

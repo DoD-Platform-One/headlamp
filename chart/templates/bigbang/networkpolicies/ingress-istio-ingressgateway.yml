@@ -1,0 +1,23 @@
+{{- if and (default false (default dict .Values.networkPolicies).enabled) (default false (default dict .Values.istio).enabled) }}
+# Allow traffic from the IngressGateway to the Headlamp UI
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingress-headlamp-istio-igw
+  namespace:  {{ .Release.Namespace }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: headlamp
+  ingress:
+  - ports:
+    - port: 80
+      protocol: TCP
+    from:
+    - podSelector:
+        matchLabels:
+          {{- toYaml .Values.networkPolicies.ingressLabels | nindent 10}}
+      namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: istio-controlplane
+{{- end }}

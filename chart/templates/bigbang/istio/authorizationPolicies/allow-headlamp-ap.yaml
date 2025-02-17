@@ -1,0 +1,17 @@
+{{- if and (default false (default dict .Values.istio).enabled) (default false (default dict .Values.istio.hardened).enabled) -}}
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-headlamp-authz
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "headlamp.selectorLabels" . | nindent 6 }}
+  action: ALLOW
+  rules:
+  - from:
+    - source:
+        namespaces:
+        - {{ .Release.Namespace }}
+{{- end }}

@@ -1,0 +1,11 @@
+apiVersion: kpt.dev/v1alpha1
+kind: Kptfile
+metadata:
+  name: chart
+upstream:
+  type: git
+  git:
+    commit: d673be1bc838ea19d894e4ce08d474f9cc9cddb5
+    repo: https://github.com/headlamp-k8s/headlamp
+    directory: /charts/headlamp
+    ref: headlamp-helm-0.28.0

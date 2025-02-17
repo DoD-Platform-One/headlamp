@@ -1,0 +1,29 @@
+{{- if and (default false (default dict .Values.networkPolicies).enabled) (default false (default dict .Values.bbtests).enabled) }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: test-headlamp-allow-egress
+  namespace: {{ .Release.Namespace }}
+spec:
+  policyTypes:
+  - Egress
+  podSelector:
+    matchLabels:
+      helm-test: enabled 
+  egress:
+  - to:
+    # Allow headlamp to talk to virtualservices during BBCI tests
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        # ONLY Block requests to AWS metadata IP
+        except:
+        - 169.254.169.254/32
+    # Allow headlamp to talk to other namespaces for package tests
+    - namespaceSelector:
+        matchLabels:
+          app.kubernetes.io/name: headlamp
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: headlamp
+      
+{{- end }}
