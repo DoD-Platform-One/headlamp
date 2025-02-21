@@ -20,7 +20,7 @@ spec:
         namespaces:
         - {{ $namespace }}
         principals:
-        - "cluster.local/ns/{{ $namespace }}/sa/{{ $name }}-ingress-gateway-service-account"
+        - "cluster.local/ns/{{ $namespace }}/sa/{{ $name }}-ingressgateway-service-account"
 ---
 {{ end -}}
 {{- end }}

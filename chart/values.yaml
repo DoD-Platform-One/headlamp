@@ -42,7 +42,7 @@ networkPolicies:
   enabled: false
   controlPlaneCidr: 0.0.0.0/0
   ingressLabels:
-    app: istio-ingressgateway
+    app: public-ingressgateway
     istio: ingressgateway
   additionalPolicies: []
 
@@ -68,12 +68,11 @@ image:
   pullPolicy: IfNotPresent
   # -- Container image tag, If "" uses appVersion in Chart.yaml
   tag: "v0.28.0"
-  imagePullSecrets:
-    - name: private-registry
+  pullSecrets:  
+    - private-registry
 
 # -- An optional list of references to secrets in the same namespace to use for pulling any of the images used
-imagePullSecrets:
-  - name: private-registry
+imagePullSecrets: []
 # -- Overrides the name of the chart
 nameOverride: ""
 # -- Overrides the full name of the chart
@@ -190,7 +189,7 @@ service:
   # -- Kubernetes Service type
   type: ClusterIP
   # -- Kubernetes Service port
-  port: 80
+  port: 4466
   # -- Kubernetes Service clusterIP
   clusterIP: ""
   # -- Kubernetes Service loadBalancerIP
