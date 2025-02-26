@@ -1,6 +1,10 @@
 # -- Domain used for BigBang created exposed services
 domain: dev.bigbang.mil
 
+global:
+  imagePullSecrets:
+  - name: private-registry
+
 istio:
   enabled: false
   # -- Default peer authentication values
@@ -49,8 +53,20 @@ networkPolicies:
 # Toggles networkpolicy needed for openshift
 openshift: false
 
+# Values for bigbang helm tests
 bbtests:
   enabled: false
+  cypress:
+    artifacts: true
+    envs:
+      cypress_url: 'http://headlamp.headlamp.svc.cluster.local:4466'
+    resources:
+      requests:
+        cpu: "1"
+        memory: "2Gi"
+      limits:
+        cpu: "1"
+        memory: "2Gi"
 
 # Default values for headlamp.
 # This is a YAML-formatted file.
@@ -72,7 +88,8 @@ image:
     - private-registry
 
 # -- An optional list of references to secrets in the same namespace to use for pulling any of the images used
-imagePullSecrets: []
+imagePullSecrets:
+- name: private-registry
 # -- Overrides the name of the chart
 nameOverride: ""
 # -- Overrides the full name of the chart
