@@ -1,0 +1,13 @@
+{{- include "gluon.tests.cypress-configmap.overrides" (list . "headlamp-test.cypress-configmap") }}
+{{- define "headlamp-test.cypress-configmap" }}
+metadata:
+  labels:
+    {{ include "headlamp.labels" . | nindent 4 }}
+{{- end }}
+---
+{{- include "gluon.tests.cypress-runner.overrides" (list . "headlamp-test.cypress-runner") -}}
+{{- define "headlamp-test.cypress-runner" -}}
+metadata:
+  labels:
+    {{ include "headlamp.labels" . | nindent 4 }}
+{{- end }}
