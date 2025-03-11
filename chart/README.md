@@ -171,8 +171,9 @@ config:
 | service.type | string | `"ClusterIP"` | Kubernetes service type |
 | service.port | int | `80` | Kubernetes service port |
 | ingress.enabled | bool | `false` | Enable ingress |
-| ingress.className | string | `""` | Ingress class name |
+| ingress.ingressClassName | string | `""` | Ingress class name |
 | ingress.annotations | object | `{}` | Ingress annotations (e.g., kubernetes.io/tls-acme: "true") |
+| ingress.labels | object | `{}` | Additional labels for the Ingress resource |
 | ingress.hosts | list | `[]` | Ingress hosts configuration |
 | ingress.tls | list | `[]` | Ingress TLS configuration |
 
@@ -182,6 +183,9 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/part-of: traefik
+    environment: prod
   hosts:
     - host: headlamp.example.com
       paths:
