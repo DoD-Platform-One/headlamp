@@ -35,6 +35,3 @@ dependencies:
   - name: gluon
     version: "0.5.14"
     repository: oci://registry1.dso.mil/bigbang
-sources:
-- https://github.com/headlamp-k8s/headlamp/tree/main/charts/headlamp
-- https://github.com/headlamp-k8s/headlamp
