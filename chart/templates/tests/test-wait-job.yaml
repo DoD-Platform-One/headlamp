@@ -1,0 +1,34 @@
+{{- include "gluon.wait.wait-job-configmap.overrides" (list . "headlamp-wait.wait-configmap") }}
+{{- define "headlamp-wait.wait-configmap" }}
+metadata:
+  labels:
+    {{ include "headlamp.labels" . | nindent 4 }}
+{{- end }}
+---
+{{ include "gluon.wait.wait-job.overrides" (list . "headlamp-wait.wait-job") }}
+{{- define "headlamp-wait.wait-job" }}
+metadata:
+  labels:
+    {{ include "headlamp.labels" . | nindent 4 }}
+{{- end }}
+---
+{{ include "gluon.wait.wait-job-sa.overrides" (list . "headlamp-wait.wait-job-sa") }}
+{{- define "headlamp-wait.wait-job-sa" }}
+metadata:
+  labels:
+    {{ include "headlamp.labels" . | nindent 4 }}
+{{- end }}
+---
+{{ include "gluon.wait.wait-job-role.overrides" (list . "headlamp-wait.wait-job-role") }}
+{{- define "headlamp-wait.wait-job-role" }}
+metadata:
+  labels:
+    {{ include "headlamp.labels" . | nindent 4 }}
+{{- end }}
+---
+{{ include "gluon.wait.wait-job-rolebinding.overrides" (list . "headlamp-wait.wait-job-rolebinding") }}
+{{- define "headlamp-wait.wait-job-rolebinding" }}
+metadata:
+  labels:
+    {{ include "headlamp.labels" . | nindent 4 }}
+{{- end }}
