@@ -306,3 +306,17 @@ extraManifests: []
 #     name: my-config-too
 #   data:
 #     key: value
+waitJob:
+  enabled: true
+  scripts:
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10
+  permissions:
+    apiGroups: 
+      - apps
+    resources:
+      - deployments
+    verbs:
+      - get
+      - list
+      - watch 
+
