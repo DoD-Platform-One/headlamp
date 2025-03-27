@@ -1,7 +1,7 @@
 apiVersion: v2
 name: headlamp
 description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
-version: 0.29.0-bb.2
+version: 0.29.0-bb.3
 appVersion: 0.29.0
 type: application
 home: https://headlamp.dev/
@@ -32,7 +32,7 @@ annotations:
     - name: headlamp
       image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.29.0
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.10
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11
       condition: waitJob.enabled
 
 dependencies:
