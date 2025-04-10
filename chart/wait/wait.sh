@@ -13,7 +13,7 @@ while true; do
    echo "Waiting for $interval seconds..."
    sleep $interval
    
-   if [[ "$(kubectl -n "$resourcename" get deployment "$resourcename" -o jsonpath='{.status.conditions[?(@.type=="Available")].status}' 2>/dev/null)" == "True" ]]; then
+   if [[ "$(kubectl -n "$resourcename" get deployment -o jsonpath='{.items[0].status.conditions[?(@.type=="Available")].status}' 2>/dev/null)" == "True" ]]; then
       echo "$resourcename custom resource creation finished"
       break
    fi

@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.30.1-bb.1] (2025-04-01)
+
+### Changed
+
+- Integrated with Keycloak SSO
+
 ## [0.30.1-bb.0] (2025-03-29)
 
 ### Changed
