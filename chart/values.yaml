@@ -132,6 +132,7 @@ config:
     #     scopes: "scopes"
 
     # -- OIDC client ID
+    # Change to your respective IDP endpoints 
     clientID: ""
     # -- OIDC client secret
     clientSecret: ""

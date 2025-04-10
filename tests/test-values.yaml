@@ -3,3 +3,7 @@ networkPolicies:
 
 bbtests:
   enabled: true
+
+istio:
+  hardened:
+    enabled: true
