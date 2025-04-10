@@ -4,25 +4,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.30.1-bb.0] (2025-03-29)
+
+### Changed
+
+- registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp v0.29.0 -> v0.30.0
+- Added cypress (source) 14.2.0 -> 14.2.1
+
 ## [0.29.0-bb.3] (2025-03-25)
 
 ### Changed
 
-- Added registry1.dso.mil/ironbank/opensource/kubernetes/kubectl (source) v1.30.10 -> v1.30.11
+- Added registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.30.10 -> v1.30.11
 
 ## [0.29.0-bb.2] (2025-03-24)
 
 ### Changed
 
-- cypress (source) dependencies minor 14.1.0 -> 14.2.0
+- cypress dependencies minor 14.1.0 -> 14.2.0
 
 ## [0.29.0-bb.1] (2025-03-13)
 
 ### Changed
 
 - Added test-wait-job
-- Added wait.sh 
-- Added WaitJob 
+- Added wait script
+- Added waitjob
 
 ## [0.29.0-bb.0] (2025-03-01)
 
@@ -54,7 +61,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 ### Added
 
 - Added kptfile
-- Added upstream files 
+- Added upstream files
 - appVersion 0.28.0
 
 ## [0.26.0-bb.0] - 2024-11-19
