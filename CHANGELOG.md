@@ -3,6 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [0.30.1-bb.2] (2025-04-15)
+
+### Changed
+
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.30.11 -> v1.32.3
+- Added cypress 14.2.0 -> 14.3.0
 
 ## [0.30.1-bb.1] (2025-04-01)
 
@@ -23,13 +29,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Added registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.30.10 -> v1.30.11
 
-## [0.29.0-bb.2] (2025-03-24)
+## [0.29.0-bb.2] - 2025-03-24
 
 ### Changed
 
 - cypress dependencies minor 14.1.0 -> 14.2.0
 
-## [0.29.0-bb.1] (2025-03-13)
+## [0.29.0-bb.1] - 2025-03-13
 
 ### Changed
 
@@ -37,7 +43,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 - Added wait script
 - Added waitjob
 
-## [0.29.0-bb.0] (2025-03-01)
+## [0.29.0-bb.0] - 2025-03-01
 
 ### Changed
 

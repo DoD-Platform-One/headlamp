@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.30.1-bb.1](https://img.shields.io/badge/Version-0.30.1--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.30.1](https://img.shields.io/badge/AppVersion-0.30.1-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.30.1-bb.2](https://img.shields.io/badge/Version-0.30.1--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.30.0](https://img.shields.io/badge/AppVersion-0.30.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -78,7 +78,7 @@ helm install headlamp chart/
 | config.baseURL | string | `""` | base url path at which headlamp should run |
 | config.oidc.secret.create | bool | `false` | Generate OIDC secret. If true, will generate a secret using .config.oidc. |
 | config.oidc.secret.name | string | `"oidc"` | Name of the OIDC secret. |
-| config.oidc.clientID | string | `""` | OIDC client ID |
+| config.oidc.clientID | string | `""` | OIDC client ID Change to your respective IDP endpoints  |
 | config.oidc.clientSecret | string | `""` | OIDC client secret |
 | config.oidc.issuerURL | string | `""` | OIDC issuer URL |
 | config.oidc.scopes | string | `""` | OIDC scopes to be used |
@@ -123,7 +123,7 @@ helm install headlamp chart/
 | affinity | object | `{}` | Affinity settings for pod assignment |
 | extraManifests | list | `[]` | Additional Kubernetes manifests to be deployed. Include the manifest as nested YAML. |
 | waitJob.enabled | bool | `true` |  |
-| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11"` |  |
+| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.3"` |  |
 | waitJob.permissions.apiGroups[0] | string | `"apps"` |  |
 | waitJob.permissions.resources[0] | string | `"deployments"` |  |
 | waitJob.permissions.verbs[0] | string | `"get"` |  |
