@@ -53,6 +53,42 @@ networkPolicies:
 # Toggles networkpolicy needed for openshift
 openshift: false
 
+# -- Monitoring toggle, affects servicemonitor and networkPolicies
+monitoring:
+  enabled: false
+  serviceMonitor:
+    scheme: ""
+    tlsConfig: {}
+
+# Alias for prometheus-blackbox-exporter
+metrics:
+  # -- Toggle Prometheus Blackbox Exporter Installation
+  enabled: false
+  port: 9115
+  # -- Exporter imagePullSecrets
+  global:
+    imagePullSecrets:
+      - name: private-registry
+  image:
+    registry: registry1.dso.mil
+    repository: ironbank/opensource/prometheus/blackbox_exporter
+    tag: v0.26.0
+    pullSecret: private-registry
+  # -- Pod securityContext
+  podSecurityContext:
+    runAsGroup: 1000
+  # -- Container securityContext
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 1000
+  config:
+    modules:
+      http_2xx:
+        prober: http
+        timeout: 5s
+        http:
+          method: GET
+
 # Values for bigbang helm tests
 bbtests:
   enabled: false
