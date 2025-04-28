@@ -1,7 +1,7 @@
 apiVersion: v2
 name: headlamp
 description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
-version: 0.30.1-bb.3
+version: 0.30.1-bb.4
 appVersion: 0.30.0
 type: application
 home: https://headlamp.dev/
