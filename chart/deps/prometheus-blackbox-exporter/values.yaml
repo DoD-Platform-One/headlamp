@@ -446,9 +446,9 @@ configReloader:
     logLevel: info
     watchInterval: 1m
   image:
-    registry: quay.io
-    repository: prometheus-operator/prometheus-config-reloader
-    tag: "v0.81.0"
+    registry: registry1.dso.mil
+    repository: /ironbank/opensource/prometheus-operator/prometheus-config-reloader
+    tag: "v0.82.0"
     pullPolicy: IfNotPresent
     digest: ""
   securityContext:
