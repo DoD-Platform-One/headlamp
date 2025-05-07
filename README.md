@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.30.1-bb.5](https://img.shields.io/badge/Version-0.30.1--bb.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.30.0](https://img.shields.io/badge/AppVersion-0.30.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.30.1-bb.6](https://img.shields.io/badge/Version-0.30.1--bb.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.30.0](https://img.shields.io/badge/AppVersion-0.30.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -57,9 +57,19 @@ helm install headlamp chart/
 | networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
 | networkPolicies.additionalPolicies | list | `[]` |  |
 | openshift | bool | `false` |  |
-| monitoring.enabled | bool | `false` |  |
-| monitoring.serviceMonitor.scheme | string | `""` |  |
-| monitoring.serviceMonitor.tlsConfig | object | `{}` |  |
+| monitoring | object | `{"enabled":false,"serviceMonitor":{"scheme":"","tlsConfig":{}}}` | Monitoring toggle, affects servicemonitor and networkPolicies |
+| metrics.enabled | bool | `false` | Toggle Prometheus Blackbox Exporter Installation |
+| metrics.port | int | `9115` |  |
+| metrics.global | object | `{"imagePullSecrets":[{"name":"private-registry"}]}` | Exporter imagePullSecrets |
+| metrics.image.registry | string | `"registry1.dso.mil"` |  |
+| metrics.image.repository | string | `"ironbank/opensource/prometheus/blackbox_exporter"` |  |
+| metrics.image.tag | string | `"v0.26.0"` |  |
+| metrics.image.pullSecret | string | `"private-registry"` |  |
+| metrics.podSecurityContext | object | `{"runAsGroup":1000}` | Pod securityContext |
+| metrics.securityContext | object | `{"runAsGroup":1000,"runAsUser":1000}` | Container securityContext |
+| metrics.config.modules.http_2xx.prober | string | `"http"` |  |
+| metrics.config.modules.http_2xx.timeout | string | `"5s"` |  |
+| metrics.config.modules.http_2xx.http.method | string | `"GET"` |  |
 | bbtests.enabled | bool | `false` |  |
 | bbtests.cypress.artifacts | bool | `true` |  |
 | bbtests.cypress.envs.cypress_url | string | `"http://headlamp.headlamp.svc.cluster.local:4466"` |  |
