@@ -1,9 +1,51 @@
-networkPolicies:
-  enabled: true
-
-bbtests:
-  enabled: true
-
-istio:
-  hardened:
+#########################
+# Disable Core Packages #
+#########################
+# monitoring:
+#   enabled: false
+grafana:
+  enabled: false
+neuvector:
+  enabled: false
+loki:
+  enabled: false
+promtail:
+  enabled: false
+tempo:
+  enabled: false
+kyvernoReporter:
+  enabled: false
+kiali:
+  enabled: false
+addons:
+  minioOperator:
+    enabled: false
+########################
+# Required for package #
+########################
+  headlamp:
     enabled: true
+    values:
+      cypress:
+        resources:
+          requests:
+            cpu: "2"
+            memory: "4Gi"
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+monitoring:
+  enabled: true
+  values:
+    bbtests:
+      enabled: false
+bbctl:
+  enabled: true
+kyvernoPolicies:
+  values:
+    bbtests:
+      enabled: false
+kyverno:
+  values:
+    bbtests:
+      enabled: false
