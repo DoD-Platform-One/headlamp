@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: dc5f3cc6d4805e1ece5b6586b360d1249f50d297
+    commit: 7c25faff050fdd61541ce1055474a77e55d13db3
     repo: https://github.com/prometheus-community/helm-charts
     directory: /charts/prometheus-blackbox-exporter
-    ref: prometheus-blackbox-exporter-9.4.0
+    ref: prometheus-blackbox-exporter-9.5.0

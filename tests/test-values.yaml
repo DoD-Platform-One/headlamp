@@ -1,8 +1,6 @@
 #########################
 # Disable Core Packages #
 #########################
-# monitoring:
-#   enabled: false
 grafana:
   enabled: false
 neuvector:
