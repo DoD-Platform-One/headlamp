@@ -1,0 +1,43 @@
+grafana:
+  enabled: false
+kiali:
+  enabled: false
+kyverno:
+  enabled: false
+kyvernoPolicies:
+  enabled: false
+kyvernoReporter:
+  enabled: false
+promtail:
+  enabled: false
+loki:
+  enabled: false
+neuvector:
+  enabled: false
+tempo:
+  enabled: false
+monitoring:
+  enabled: false
+istio:
+  enabled: true
+
+packages:
+  headlamp:
+    enabled: true
+    wrapper:
+      enabled: false
+    git:
+      repo: https://repo1.dso.mil/big-bang/apps/sandbox/headlamp.git
+      #path: chart
+      tag: null #0.9.18-bb.4
+      branch: "renovate/ironbank"
+      #branch: "test-istio-enable2"
+    istio:
+      enabled: true
+    values:
+      istio:
+        enabled: true
+        hardened:
+          enabled: true
+      networkPolicies:
+        enabled: true
