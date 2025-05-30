@@ -19,5 +19,9 @@ spec:
           {{- toYaml .Values.networkPolicies.ingressLabels | nindent 10}}
       namespaceSelector:
         matchLabels:
-          app.kubernetes.io/name: istio-controlplane
+          {{- if .Values.networkPolicies.istioNamespaceSelector }}
+          app.kubernetes.io/name: {{ .Values.networkPolicies.istioNamespaceSelector.ingress }}
+          {{- else }}
+          app.kubernetes.io/name: "istio-controlplane"
+          {{- end }}
 {{- end }}
