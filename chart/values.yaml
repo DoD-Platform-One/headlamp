@@ -119,7 +119,7 @@ image:
   # -- Image pull policy. One of Always, Never, IfNotPresent
   pullPolicy: IfNotPresent
   # -- Container image tag, If "" uses appVersion in Chart.yaml
-  tag: "v0.30.0"
+  tag: "v0.31.0"
   pullSecrets:  
     - private-registry
 
@@ -177,6 +177,13 @@ config:
     # -- OIDC scopes to be used
     scopes: ""
 
+    # -- OIDC client to be used during token validation
+    validatorClientID: ""
+    # -- OIDC Issuer URL to be used during token validation
+    validatorIssuerURL: ""
+    # -- Use 'access_token' instead of 'id_token' when authenticating using OIDC
+    useAccessToken: false
+
     # Option 3:
     # @param config.oidc - External OIDC secret configuration
     # If you want to use an external secret for OIDC configuration, enable this option.
@@ -194,6 +201,7 @@ config:
       name: ""
   # -- directory to look for plugins
   pluginsDir: "/headlamp/plugins"
+  watchPlugins: false
   # Extra arguments that can be given to the container. See charts/headlamp/README.md for more information.
   extraArgs: []
 
@@ -220,6 +228,9 @@ clusterRoleBinding:
   clusterRoleName: cluster-admin
   # -- Annotations to add to the cluster role binding
   annotations: {}
+
+# -- Annotations to add to the deployment
+deploymentAnnotations: {}
 
 # -- Annotations to add to the pod
 podAnnotations: {}
@@ -330,6 +341,27 @@ tolerations: []
 # -- Affinity settings for pod assignment
 affinity: {}
 
+# Plugin Manager Sidecar Container Configuration
+pluginsManager:
+  # -- Enable plugin manager
+  enabled: false
+  # -- Plugin configuration file name
+  configFile: "plugin.yml"
+  # -- Plugin configuration content in YAML format. This is required if plugins.enabled is true.
+  configContent: ""
+  # -- Base node image to use
+  baseImage: node:lts-alpine
+  # -- Headlamp plugin package version to install
+  version: latest
+  # -- Specify resrouces
+  # resources:
+  #   requests:
+  #     cpu: "500m"
+  #     memory: "2048Mi"
+  #   limits:
+  #     cpu: "1000m"
+  #     memory: "4096Mi"
+
 # -- Additional Kubernetes manifests to be deployed. Include the manifest as nested YAML.
 extraManifests: []
 # - apiVersion: v1
@@ -347,7 +379,7 @@ extraManifests: []
 waitJob:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
   permissions:
     apiGroups: 
       - apps

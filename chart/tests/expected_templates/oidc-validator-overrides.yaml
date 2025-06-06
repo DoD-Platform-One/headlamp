@@ -11,31 +11,6 @@ metadata:
     app.kubernetes.io/version: "0.31.0"
     app.kubernetes.io/managed-by: Helm
 ---
-# Source: headlamp/templates/secret.yaml
-apiVersion: v1
-kind: Secret
-metadata:
-  name: oidc
-type: Opaque
-data:
----
-# Source: headlamp/templates/extra-manifests.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: dummy-configmap
-data:
-  key1: value1
-  key2: value2
----
-# Source: headlamp/templates/extra-manifests.yaml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: configmap-with-templated-data
-data:
-  injectedKey: headlamp
----
 # Source: headlamp/templates/clusterrolebinding.yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -119,10 +94,38 @@ spec:
           imagePullPolicy: IfNotPresent
           
           env:
+            - name: OIDC_CLIENT_ID
+              value: testClientId
+            - name: OIDC_CLIENT_SECRET
+              value: testClientSecret
+            - name: OIDC_ISSUER_URL
+              value: testIssuerURL
+            - name: OIDC_SCOPES
+              value: testScope
+            - name: OIDC_VALIDATOR_CLIENT_ID
+              value: overriddenClientID
+            - name: OIDC_VALIDATOR_ISSUER_URL
+              value: overriddenIssuerURL
+            - name: OIDC_USE_ACCESS_TOKEN
+              value: true
           args:
             - "-in-cluster"
             - "-plugins-dir=/headlamp/plugins"
             # Check if externalSecret is disabled
+            # Check if clientID is non empty either from env or oidc.config
+            - "-oidc-client-id=$(OIDC_CLIENT_ID)"
+            # Check if clientSecret is non empty either from env or oidc.config
+            - "-oidc-client-secret=$(OIDC_CLIENT_SECRET)"
+            # Check if issuerURL is non empty either from env or oidc.config
+            - "-oidc-idp-issuer-url=$(OIDC_ISSUER_URL)"
+            # Check if scopes are non empty either from env or oidc.config
+            - "-oidc-scopes=$(OIDC_SCOPES)"
+            # Check if validatorClientID is non empty either from env or oidc.config
+            - "-oidc-validator-client-id=$(OIDC_VALIDATOR_CLIENT_ID)"
+            # Check if validatorIssuerURL is non empty either from env or oidc.config
+            - "-oidc-validator-idp-issuer-url=$(OIDC_VALIDATOR_ISSUER_URL)"
+            # Check if useAccessToken is non false either from env or oidc.config
+            - "-oidc-use-access-token=$(OIDC_USE_ACCESS_TOKEN)"
           ports:
             - name: http
               containerPort: 4466
