@@ -18,9 +18,9 @@ kiali:
 addons:
   minioOperator:
     enabled: false
-########################
-# Required for package #
-########################
+  ########################
+  # Required for package #
+  ########################
   headlamp:
     enabled: true
     values:
@@ -38,7 +38,7 @@ monitoring:
     bbtests:
       enabled: false
 bbctl:
-  enabled: true
+  enabled: false
 kyvernoPolicies:
   values:
     bbtests:

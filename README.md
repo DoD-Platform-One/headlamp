@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.30.1-bb.8](https://img.shields.io/badge/Version-0.30.1--bb.8-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.30.0](https://img.shields.io/badge/AppVersion-0.30.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.31.0-bb.0](https://img.shields.io/badge/Version-0.31.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.31.0](https://img.shields.io/badge/AppVersion-0.31.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -95,6 +95,9 @@ helm install headlamp chart/
 | config.oidc.clientSecret | string | `""` | OIDC client secret |
 | config.oidc.issuerURL | string | `""` | OIDC issuer URL |
 | config.oidc.scopes | string | `""` | OIDC scopes to be used |
+| config.oidc.validatorClientID | string | `""` | OIDC client to be used during token validation |
+| config.oidc.validatorIssuerURL | string | `""` | OIDC Issuer URL to be used during token validation |
+| config.oidc.useAccessToken | bool | `false` | Use 'access_token' instead of 'id_token' when authenticating using OIDC |
 | config.oidc.externalSecret.enabled | bool | `false` |  |
 | config.oidc.externalSecret.name | string | `""` |  |
 | config.pluginsDir | string | `"/headlamp/plugins"` | directory to look for plugins |
@@ -106,6 +109,7 @@ helm install headlamp chart/
 | clusterRoleBinding.create | bool | `true` | Specified whether a cluster role binding should be created |
 | clusterRoleBinding.clusterRoleName | string | `"cluster-admin"` | Set name of the Cluster Role with limited permissions from you cluster for example - clusterRoleName: user-ro |
 | clusterRoleBinding.annotations | object | `{}` | Annotations to add to the cluster role binding |
+| deploymentAnnotations | object | `{}` | Annotations to add to the deployment |
 | podAnnotations | object | `{}` | Annotations to add to the pod |
 | podSecurityContext | object | `{}` | Headlamp pod's Security Context |
 | securityContext | object | `{"privileged":false,"runAsGroup":101,"runAsNonRoot":true,"runAsUser":100}` | Headlamp containers Security Context |
@@ -134,9 +138,14 @@ helm install headlamp chart/
 | nodeSelector | object | `{}` | Node labels for pod assignment |
 | tolerations | list | `[]` | Toleration labels for pod assignment |
 | affinity | object | `{}` | Affinity settings for pod assignment |
+| pluginsManager.enabled | bool | `false` | Enable plugin manager |
+| pluginsManager.configFile | string | `"plugin.yaml"` | Plugin configuration file name |
+| pluginsManager.configContent | string | `""` | Plugin configuration content in YAML format. This is required if plugins.enabled is true. |
+| pluginsManager.baseImage | string | `"node:lts-alpine"` | Base node image to use |
+| pluginsManager.version | string | `"latest"` | Headlamp plugin package version to install |
 | extraManifests | list | `[]` | Additional Kubernetes manifests to be deployed. Include the manifest as nested YAML. |
 | waitJob.enabled | bool | `true` |  |
-| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.4"` |  |
+| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5"` |  |
 | waitJob.permissions.apiGroups[0] | string | `"apps"` |  |
 | waitJob.permissions.resources[0] | string | `"deployments"` |  |
 | waitJob.permissions.verbs[0] | string | `"get"` |  |
