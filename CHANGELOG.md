@@ -4,6 +4,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.31.1-bb.1] (2025-06-23)
+
+### Updated
+
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl v1.32.5 -> v1.32.6
+- Updated cypress 14.4.1 -> 14.5.0
+
 ## [0.31.1-bb.0] (2025-06-11)
 
 ### Updated
