@@ -379,7 +379,7 @@ extraManifests: []
 waitJob:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.5
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.6
   permissions:
     apiGroups: 
       - apps
