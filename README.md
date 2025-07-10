@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.31.1-bb.1](https://img.shields.io/badge/Version-0.31.1--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.31.1](https://img.shields.io/badge/AppVersion-0.31.1-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.32.1-bb.0](https://img.shields.io/badge/Version-0.32.1--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.32.1](https://img.shields.io/badge/AppVersion-0.32.1-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -63,7 +63,7 @@ helm install headlamp chart/
 | metrics.global | object | `{"imagePullSecrets":[{"name":"private-registry"}]}` | Exporter imagePullSecrets |
 | metrics.image.registry | string | `"registry1.dso.mil"` |  |
 | metrics.image.repository | string | `"ironbank/opensource/prometheus/blackbox_exporter"` |  |
-| metrics.image.tag | string | `"v0.26.0"` |  |
+| metrics.image.tag | string | `"v0.27.0"` |  |
 | metrics.image.pullSecret | string | `"private-registry"` |  |
 | metrics.podSecurityContext | object | `{"runAsGroup":1000}` | Pod securityContext |
 | metrics.securityContext | object | `{"runAsGroup":1000,"runAsUser":1000}` | Container securityContext |
@@ -81,7 +81,7 @@ helm install headlamp chart/
 | image.registry | string | `"registry1.dso.mil"` | Container image registry |
 | image.repository | string | `"ironbank/opensource/headlamp-k8s/headlamp"` | Container image name |
 | image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. One of Always, Never, IfNotPresent |
-| image.tag | string | `"v0.31.1"` | Container image tag, If "" uses appVersion in Chart.yaml |
+| image.tag | string | `"v0.32.0"` | Container image tag, If "" uses appVersion in Chart.yaml |
 | image.pullSecrets[0] | string | `"private-registry"` |  |
 | imagePullSecrets | list | `[{"name":"private-registry"}]` | An optional list of references to secrets in the same namespace to use for pulling any of the images used |
 | nameOverride | string | `""` | Overrides the name of the chart |

@@ -4,6 +4,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.32.1-bb.0] (2025-07-07)
+
+### Updated
+
+- Updated headlamp `0.31.1` -> `0.32.1`
+- Updated gluon `0.6.2` -> `0.6.3`
+- Updated ironbank/opensource/prometheus/blackbox_exporter `v0.26.0` -> `v0.27.0`
+- Updated registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp `v0.31.1` -> `v0.32.0`
+- Updated registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp `0.31.1` -> `0.32.0`
+- Updated registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter`v0.26.0` -> `v0.27.0`
+- Updated cypress `14.5.0` -> `14.5.1`
+
 ## [0.31.1-bb.1] (2025-06-23)
 
 ### Updated
