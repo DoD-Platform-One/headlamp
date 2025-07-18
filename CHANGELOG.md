@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.32.1-bb.2] (2025-07-18)
+
+### Updated
+
+- Updated registry1.dso.mil//ironbank/opensource/prometheus-operator/prometheus-config-reloader `v0.83.0` -> `v0.84.0`
+- Updated registry1.dso.mil/ironbank/opensource/kubernetes/kubectl `v1.32.6` -> `v1.32.7`
+- Updated cypress `14.5.1` -> `14.5.2`
+
 ## [0.32.1-bb.1] (2025-07-17)
 
 ### Updated
