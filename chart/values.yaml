@@ -137,6 +137,8 @@ initContainers: []
 config:
   inCluster: true
   # -- base url path at which headlamp should run
+  # Note: Do not include a trailing slash in the baseURL configuration.
+  # Example: "/headlamp"
   baseURL: ""
   oidc:
     # Option 1:
