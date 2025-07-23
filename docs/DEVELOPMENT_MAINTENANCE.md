@@ -102,6 +102,13 @@ helm upgrade -i bigbang ${BIGBANG_REPO_DIR}/chart/ -n bigbang --create-namespace
 ```
 This will deploy the headlamp for testing.
 
+## Accessing Headlamp UI
+
+To access Headlamp UI dashboard a token is needed for access. Run this command to generate a token for access.
+```
+kubectl create token headlamp -n headlamp
+```
+
 ## Test Values Yaml / Validation
 
 To install Headlamp as a community package in a Big Bang Kubernetes Cluster, save the following YAML to a file (eg, headlamp.yaml):
