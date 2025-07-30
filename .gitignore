@@ -12,6 +12,7 @@ certs/
 
 # dependencies
 /node_modules
+chart/tests/node_modules
 
 # debug
 npm-debug.log*
