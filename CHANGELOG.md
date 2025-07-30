@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.32.1-bb.3] (2025-07-29)
+
+### Added
+
+- Flux plugin cypress test
+
 ## [0.32.1-bb.2] (2025-07-18)
 
 ### Updated
