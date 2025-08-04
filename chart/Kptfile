@@ -5,7 +5,7 @@ metadata:
 upstream:
   type: git
   git:
-    commit: bc04be0210465b217c9a6c655630669d4a6a2876
+    commit: d4bcdb2348bccaf9263b9d826b75317d73cdbf43
     repo: https://github.com/headlamp-k8s/headlamp
     directory: /charts/headlamp
-    ref: headlamp-helm-0.32.1
+    ref: headlamp-helm-0.33.0

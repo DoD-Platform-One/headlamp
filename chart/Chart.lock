@@ -1,9 +1,9 @@
 dependencies:
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.6.3
+  version: 0.7.0
 - name: prometheus-blackbox-exporter
   repository: file://./deps/prometheus-blackbox-exporter
   version: 9.5.0
-digest: sha256:3f19a780f779611ca0a025e8cbb83d36b27dbf69fcc117557643c03fa5265f54
-generated: "2025-07-01T20:17:48.477070306Z"
+digest: sha256:bf039b21c65136940add6f480e64c5ec54be99161d769979279dd6c08e56b15a
+generated: "2025-07-19T06:06:11.680894682Z"
