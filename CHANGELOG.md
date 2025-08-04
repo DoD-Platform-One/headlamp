@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.33.0-bb.0] (2025-08-01)
+
+### Updated
+
+- gluon `0.6.3` -> `0.7.0`
+- registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp (source) `v0.32.0` -> `v0.33.0`
+- Updated cypress `14.5.2` -> `14.5.3`
+
 ## [0.32.1-bb.3] (2025-07-29)
 
 ### Added
