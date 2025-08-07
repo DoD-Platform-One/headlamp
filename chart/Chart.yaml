@@ -1,8 +1,8 @@
 apiVersion: v2
 name: headlamp
 description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
-version: 0.33.0-bb.0
-appVersion: 0.33.0
+version: 0.34.0-bb.0
+appVersion: 0.34.0
 type: application
 home: https://headlamp.dev/
 icon: https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/docs/headlamp_light.svg
@@ -24,13 +24,13 @@ maintainers:
     url: https://kinvolk.io/
 annotations:
   bigbang.dev/applicationVersions: |
-    - Headlamp: 0.33.0
+    - Headlamp: 0.34.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find upstream chart's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
     - [Find upstream applications's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
   helm.sh/images: |
     - name: headlamp
-      image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.33.0
+      image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.34.0
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.7
       condition: waitJob.enabled

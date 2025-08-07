@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.34.0-bb.0] (2025-08-04)
+
+### Updated
+
+- registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp (source) v0.33.0 -> v0.34.0
+
 ## [0.33.0-bb.0] (2025-08-01)
 
 ### Updated

@@ -8,4 +8,4 @@ upstream:
     commit: d4bcdb2348bccaf9263b9d826b75317d73cdbf43
     repo: https://github.com/headlamp-k8s/headlamp
     directory: /charts/headlamp
-    ref: headlamp-helm-0.33.0
+    ref: headlamp-helm-0.34.0
