@@ -25,25 +25,25 @@ spec:
     - {{ tpl . $}}
   {{- end }}
   http:
-  {{- if .Values.config.baseURL }}
+  {{- if .Values.upstream.config.baseURL }}
   - match:
     - uri:
-        exact: {{ .Values.config.baseURL }}
+        exact: {{ .Values.upstream.config.baseURL }}
     rewrite:
-      uri: {{ .Values.config.baseURL }}/
+      uri: {{ .Values.upstream.config.baseURL }}/
     route:
     - destination:
         host: {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local
         port:
-          number: {{ .Values.service.port }}
+          number: {{ .Values.upstream.service.port }}
   - match:
     - uri:
-        prefix: {{ .Values.config.baseURL }}
+        prefix: {{ .Values.upstream.config.baseURL }}
     route:
     - destination:
         host: {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local
         port:
-          number: {{ .Values.service.port }}
+          number: {{ .Values.upstream.service.port }}
   {{- else }}
   - match:
     - uri:
@@ -52,6 +52,6 @@ spec:
     - destination:
         host: {{ .Release.Name }}.{{ .Release.Namespace }}.svc.cluster.local
         port:
-          number: {{ .Values.service.port }}
+          number: {{ .Values.upstream.service.port }}
   {{- end }}
 {{- end }}
