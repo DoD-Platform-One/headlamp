@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.34.0-bb.1](https://img.shields.io/badge/Version-0.34.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.34.0](https://img.shields.io/badge/AppVersion-0.34.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.34.0-bb.2](https://img.shields.io/badge/Version-0.34.0--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.34.0](https://img.shields.io/badge/AppVersion-0.34.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -77,17 +77,24 @@ helm install headlamp chart/
 | bbtests.cypress.resources.requests.memory | string | `"2Gi"` |  |
 | bbtests.cypress.resources.limits.cpu | string | `"1"` |  |
 | bbtests.cypress.resources.limits.memory | string | `"2Gi"` |  |
-| upstream.image.registry | string | `"registry1.dso.mil"` | Container image registry |
-| upstream.image.repository | string | `"ironbank/opensource/headlamp-k8s/headlamp"` | Container image name |
-| upstream.image.pullPolicy | string | `"IfNotPresent"` | Image pull policy. One of Always, Never, IfNotPresent |
-| upstream.image.tag | string | `"v0.34.0"` | Container image tag, If "" uses appVersion in Chart.yaml |
+| waitJob.enabled | bool | `true` |  |
+| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.4"` |  |
+| waitJob.permissions.apiGroups[0] | string | `"apps"` |  |
+| waitJob.permissions.resources[0] | string | `"deployments"` |  |
+| waitJob.permissions.verbs[0] | string | `"get"` |  |
+| waitJob.permissions.verbs[1] | string | `"list"` |  |
+| waitJob.permissions.verbs[2] | string | `"watch"` |  |
+| upstream.image.registry | string | `"registry1.dso.mil"` |  |
+| upstream.image.repository | string | `"ironbank/opensource/headlamp-k8s/headlamp"` |  |
+| upstream.image.pullPolicy | string | `"Always"` |  |
+| upstream.image.tag | string | `"v0.34.0"` |  |
 | upstream.image.pullSecrets[0] | string | `"private-registry"` |  |
-| upstream.imagePullSecrets | list | `[{"name":"private-registry"}]` | An optional list of references to secrets in the same namespace to use for pulling any of the images used |
-| upstream.nameOverride | string | `"headlamp"` | Overrides the name of the chart |
-| upstream.config.baseURL | string | `""` | base url path at which headlamp should run Note: Do not include a trailing slash in the baseURL configuration. Example: "/headlamp" |
-| upstream.config.oidc.clientID | string | `""` | OIDC client ID Change to your respective IDP endpoints  |
-| upstream.securityContext | object | `{"privileged":false,"runAsGroup":101,"runAsNonRoot":true,"runAsUser":100}` | Headlamp containers Security Context |
-| upstream.service.port | int | `4466` | Kubernetes Service port |
+| upstream.imagePullSecrets[0].name | string | `"private-registry"` |  |
+| upstream.nameOverride | string | `"headlamp"` |  |
+| upstream.config.baseURL | string | `""` |  |
+| upstream.config.oidc.clientID | string | `""` |  |
+| upstream.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| upstream.service.port | int | `4466` |  |
 
 ## Contributing
 
