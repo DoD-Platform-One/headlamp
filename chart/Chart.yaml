@@ -1,7 +1,7 @@
 apiVersion: v2
 name: headlamp
 description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
-version: 0.34.0-bb.1
+version: 0.34.0-bb.2
 appVersion: 0.34.0
 type: application
 home: https://headlamp.dev/
@@ -29,7 +29,7 @@ annotations:
     - name: headlamp
       image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.34.0
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.7
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.4
       condition: waitJob.enabled
     - name: kubectl-gluon
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.30.11  
@@ -43,7 +43,7 @@ dependencies:
     version: 0.34.0
     repository: https://kubernetes-sigs.github.io/headlamp/
   - name: gluon
-    version: "0.7.0"
+    version: "0.8.4"
     repository: oci://registry1.dso.mil/bigbang
   - name: prometheus-blackbox-exporter
     repository: file://./deps/prometheus-blackbox-exporter

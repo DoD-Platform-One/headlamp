@@ -4,6 +4,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.34.0-bb.2] (2025-08-27)
+
+### Changed
+
+- Updated gluon 0.7.0 -> 0.8.4
+- Updated ironbank/opensource/prometheus-operator/prometheus-config-reloader v0.84.0 -> v0.85.0
+- Updated ironbank/opensource/kubernetes/kubectl (source) v1.32.7 -> v1.33.4
+
 ## [0.34.0-bb.1] (2025-08-06)
 
 ### Updated
