@@ -4,6 +4,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.34.0-BB.3] (2025-09-03)
+
+### Added
+
+- Added config-reloader image to chart
+
 ## [0.34.0-bb.2] (2025-08-27)
 
 ### Changed
