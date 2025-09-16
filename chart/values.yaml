@@ -107,7 +107,7 @@ bbtests:
 waitJob:
   enabled: true
   scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.4
+    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.5
   permissions:
     apiGroups:
       - apps
@@ -123,7 +123,7 @@ upstream:
     registry: registry1.dso.mil
     repository: ironbank/opensource/headlamp-k8s/headlamp
     pullPolicy: Always
-    tag: "v0.34.0"
+    tag: "v0.35.0"
     pullSecrets:
       - private-registry
 

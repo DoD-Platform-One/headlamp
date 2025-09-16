@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.34.0-bb.3](https://img.shields.io/badge/Version-0.34.0--bb.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.34.0](https://img.shields.io/badge/AppVersion-0.34.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.35.0-bb.0](https://img.shields.io/badge/Version-0.35.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.35.0](https://img.shields.io/badge/AppVersion-0.35.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -78,7 +78,7 @@ helm install headlamp chart/
 | bbtests.cypress.resources.limits.cpu | string | `"1"` |  |
 | bbtests.cypress.resources.limits.memory | string | `"2Gi"` |  |
 | waitJob.enabled | bool | `true` |  |
-| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.4"` |  |
+| waitJob.scripts.image | string | `"registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.5"` |  |
 | waitJob.permissions.apiGroups[0] | string | `"apps"` |  |
 | waitJob.permissions.resources[0] | string | `"deployments"` |  |
 | waitJob.permissions.verbs[0] | string | `"get"` |  |
@@ -87,7 +87,7 @@ helm install headlamp chart/
 | upstream.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.image.repository | string | `"ironbank/opensource/headlamp-k8s/headlamp"` |  |
 | upstream.image.pullPolicy | string | `"Always"` |  |
-| upstream.image.tag | string | `"v0.34.0"` |  |
+| upstream.image.tag | string | `"v0.35.0"` |  |
 | upstream.image.pullSecrets[0] | string | `"private-registry"` |  |
 | upstream.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.nameOverride | string | `"headlamp"` |  |

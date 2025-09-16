@@ -3,8 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [0.35.0-bb.0] (2025-09-15)
 
-## [0.34.0-BB.3] (2025-09-03)
+### Added
+
+- Updated chart to 0.35.0
+- gluon 0.8.4 -> 0.9.0
+- registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp 0.34.0 -> 0.35.0
+- registry1.dso.mil/ironbank/opensource/kubernetes/kubectl (source) v1.33.4 -> v1.33.5
+- cypress (source) ^14.3.0 -> ^15.0.0
+
+## [0.34.0-bb.3] (2025-09-03)
 
 ### Added
 
