@@ -20,6 +20,12 @@
       "matchDatasources": [
         "docker"
       ],
+      "matchManagers": [
+        "helm-values",
+        "helmv3",
+        "regex",
+        "npm"
+      ],
       "groupName": "Ironbank",
       "registryUrls": [
         "https://registry1.dso.mil"
