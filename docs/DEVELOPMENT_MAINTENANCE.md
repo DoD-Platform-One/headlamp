@@ -6,38 +6,37 @@ This section should include information about what updates need to be made to th
 
 The below details the steps required to update to a new version of the Headlamp package.
 
-1. Checkout the branch that renovate created. This branch will have the image tag updates and typically some other necessary version changes that you will want. You can either work off of this branch or branch off of it.
+1. To update headlamp's helm chart, navigate to [upstream](https://github.com/kubernetes-sigs/headlamp) and find the latest tag. Next, update the dependency within `chart/Chart.yaml` and run `helm dependencies update ./chart` to pull in the new chart. Make sure the old helm chart has been removed and the new one has been added within chart/charts.
 
-2. Update the chart via `kpt`. You should be able to run `kpt pkg update chart@headlamp-helm-$version --strategy alpha-git-patch` (ex: `kpt pkg update chart@headlamp-helm-0.30.1 --strategy alpha-git-patch`).
+2. Update version references for the Chart. `version` should be `<version>-bb.x` (ex: `0.30.1-bb.x`) and `appVersion` should be `<version>` (ex: `0.30.1`). Also validate that the BB annotation for confluence is updated.
 
-3. Update version references for the Chart. `version` should be `<version>-bb.0` (ex: `0.30.1-bb.0`) and `appVersion` should be `<version>` (ex: `0.30.1`). Also validate that the BB annotation for confluence is updated.
+3. Review the [upstream release notes](https://github.com/headlamp-k8s/headlamp/releases/) for the update you are going to, as well as any versions skipped over between the last BB release and this one. Note any breaking changes and new features.
 
-4. Review the [upstream release notes](https://github.com/headlamp-k8s/headlamp/releases/) for the update you are going to, as well as any versions skipped over between the last BB release and this one. Note any breaking changes and new features.
+4. Based on the upstream changelog review from earlier, make any changes required to resolve breaking changes and reconcile the Big Bang modifications.
 
-5. Based on the upstream changelog review from earlier, make any changes required to resolve breaking changes and reconcile the Big Bang modifications.
-
-6. Modify the `version` in `Chart.yaml`. Also modify the `appVersion` and the `bigbang.dev/applicationVersions` to the new upstream version of Headlamp.
+5. Modify the `version` in `Chart.yaml`. Also modify the `appVersion` and the `bigbang.dev/applicationVersions` to the new upstream version of Headlamp.
     ```yaml
     dependencies:
     - name: headlamp
+      alias: upstream
       version: X.X.X
       repository: https://headlamp-k8s.github.io/headlamp/
     - name: gluon
       repository: oci://registry1.dso.mil/bigbang
       version: X.X.X
     ```
-7. Update helm dependencies to latest library versions.
+6. Update helm dependencies to latest library versions.
     ```
     helm dependency update ./chart
     ```
 
-6. Add a changelog entry for the update. At minimum mention updating the image versions, `Updated Headlamp to x.x.x`.
+7. Add a changelog entry for the update. At minimum mention updating the image versions, `Updated Headlamp to x.x.x`.
 
-7. Update the readme following the [steps in Gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
+8. Update the readme following the [steps in Gluon](https://repo1.dso.mil/platform-one/big-bang/apps/library-charts/gluon/-/blob/master/docs/bb-package-readme.md).
 
-8. Open MR (or check the one that Renovate created for you) and validate that the pipeline is successful. Also follow the testing steps below for some manual confirmations.
+9. Open MR (or check the one that Renovate created for you) and validate that the pipeline is successful. Also follow the testing steps below for some manual confirmations.
 
-9. Once all manual testing is complete take your MR out of "Draft" status and add the review label.
+10. Once all manual testing is complete take your MR out of "Draft" status and add the review label.
 
 # Testing new Headlamp version
 
