@@ -118,6 +118,8 @@ waitJob:
       - list
       - watch
 
+# -- Values to pass to [the upstream headlamp chart](https://github.com/kubernetes-sigs/headlamp/blob/main/charts/headlamp/values.yaml)
+# @default -- Upstream chart values
 upstream:
   image:
     registry: registry1.dso.mil

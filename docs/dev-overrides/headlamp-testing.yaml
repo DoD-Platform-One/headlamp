@@ -16,7 +16,7 @@ tempo:
   enabled: false
 monitoring:
   enabled: false
-istio:
+istioGateway:
   enabled: true
 
 packages:
@@ -28,7 +28,7 @@ packages:
       repo: https://repo1.dso.mil/big-bang/apps/sandbox/headlamp.git
       #path: chart
       tag: null #0.9.18-bb.4
-      branch: "renovate/ironbank"
+      branch: "main"
       #branch: "test-istio-enable2"
     istio:
       enabled: true
