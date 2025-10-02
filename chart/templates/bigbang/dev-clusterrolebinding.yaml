@@ -1,0 +1,41 @@
+{{- if .Values.bigbang.rbac.enabled }}
+{{- range $r := (.Values.bigbang.rbac.clusterRoles | default list) }}
+{{- if $r.create | default true }}
+{{- $defaultRules := list 
+    (dict "apiGroups" (list "") "resources" (list "pods" "service" "configmaps" "events" "nodes" "namespaces") "verbs" (list "get" "list" "watch"))
+    (dict "apiGroups" (list "apps" "batch") "resources" (list "deployments" "statefulsets" "replicasets" "jobs" "cronjobs") "verbs" (list "get" "list" "watch"))
+    (dict "apiGroups" (list "storage.k8s.io") "resources" (list "storageclasses") "verbs" (list "get" "list" "watch"))
+-}}
+{{- $rules := (default $defaultRules $r.rules) -}}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ printf "%s" $r.name | trunc 63 | trimSuffix "-" }}
+rules:
+{{- toYaml $rules | nindent 2 }}
+{{- end }}
+{{- end }}
+{{- range $b := (.Values.bigbang.rbac.clusterRoleBindings | default list) }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ printf "%s" $b.name | trunc 63 | trimSuffix "-" }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ printf "%s" $b.roleRef | trunc 63 | trimSuffix "-" | quote }}
+subjects:
+{{- range $s := ($b.subjects | default list) }}
+- kind: {{ $s.kind }}
+  {{- if eq $s.kind "ServiceAccount" }}
+  name: {{ default $.Release.Name $s.name }}
+  namespace: {{ default $.Release.Namespace $s.namespace }}
+  {{- else if or (eq $s.kind "Group") (eq $s.kind "User") }}
+  name: {{ $s.name }}
+  apiGroups: rbac.authorization.k8s.io
+  {{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

@@ -118,8 +118,32 @@ waitJob:
       - list
       - watch
 
-# -- Values to pass to [the upstream headlamp chart](https://github.com/kubernetes-sigs/headlamp/blob/main/charts/headlamp/values.yaml)
-# @default -- Upstream chart values
+bigbang:
+  rbac:
+    enabled: false
+    clusterRoles: 
+      - name: read-1
+        create: true
+        rules: 
+          - apiGroups:
+              - ""
+            resources:
+              - namespaces
+              - pods
+              - nodes
+            verbs: 
+              - get 
+              - list
+              - watch
+                  
+    clusterRoleBindings:
+      - name: read-1
+        roleRef: read-1
+        subjects: 
+          - kind: ServiceAccount
+            name: dev-sa
+            namespace:
+
 upstream:
   image:
     registry: registry1.dso.mil
@@ -148,4 +172,13 @@ upstream:
         - ALL
 
   service:
-    port: 4466
+    port: 4466 
+    
+  clusterRoleBinding:
+    # -- Specified whether a cluster role binding should be created
+    create: true
+    # -- Set name of the Cluster Role with limited permissions from you cluster
+    # for example - clusterRoleName: user-ro
+    clusterRoleName: cluster-admin
+    # -- Annotations to add to the cluster role binding
+    annotations: {}    
