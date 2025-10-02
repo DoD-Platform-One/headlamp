@@ -23,7 +23,7 @@
       "matchManagers": [
         "helm-values",
         "helmv3",
-        "regex",
+        "custom.regex",
         "npm"
       ],
       "groupName": "Ironbank",
