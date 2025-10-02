@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.35.0-bb.1](https://img.shields.io/badge/Version-0.35.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.35.0](https://img.shields.io/badge/AppVersion-0.35.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.35.0-bb.2](https://img.shields.io/badge/Version-0.35.0--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.35.0](https://img.shields.io/badge/AppVersion-0.35.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -84,6 +84,21 @@ helm install headlamp chart/
 | waitJob.permissions.verbs[0] | string | `"get"` |  |
 | waitJob.permissions.verbs[1] | string | `"list"` |  |
 | waitJob.permissions.verbs[2] | string | `"watch"` |  |
+| bigbang.rbac.enabled | bool | `false` |  |
+| bigbang.rbac.clusterRoles[0].name | string | `"read-1"` |  |
+| bigbang.rbac.clusterRoles[0].create | bool | `true` |  |
+| bigbang.rbac.clusterRoles[0].rules[0].apiGroups[0] | string | `""` |  |
+| bigbang.rbac.clusterRoles[0].rules[0].resources[0] | string | `"namespaces"` |  |
+| bigbang.rbac.clusterRoles[0].rules[0].resources[1] | string | `"pods"` |  |
+| bigbang.rbac.clusterRoles[0].rules[0].resources[2] | string | `"nodes"` |  |
+| bigbang.rbac.clusterRoles[0].rules[0].verbs[0] | string | `"get"` |  |
+| bigbang.rbac.clusterRoles[0].rules[0].verbs[1] | string | `"list"` |  |
+| bigbang.rbac.clusterRoles[0].rules[0].verbs[2] | string | `"watch"` |  |
+| bigbang.rbac.clusterRoleBindings[0].name | string | `"read-1"` |  |
+| bigbang.rbac.clusterRoleBindings[0].roleRef | string | `"read-1"` |  |
+| bigbang.rbac.clusterRoleBindings[0].subjects[0].kind | string | `"ServiceAccount"` |  |
+| bigbang.rbac.clusterRoleBindings[0].subjects[0].name | string | `"dev-sa"` |  |
+| bigbang.rbac.clusterRoleBindings[0].subjects[0].namespace | string | `nil` |  |
 | upstream.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.image.repository | string | `"ironbank/opensource/headlamp-k8s/headlamp"` |  |
 | upstream.image.pullPolicy | string | `"Always"` |  |
@@ -95,6 +110,9 @@ helm install headlamp chart/
 | upstream.config.oidc.clientID | string | `""` |  |
 | upstream.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
 | upstream.service.port | int | `4466` |  |
+| upstream.clusterRoleBinding.create | bool | `true` | Specified whether a cluster role binding should be created |
+| upstream.clusterRoleBinding.clusterRoleName | string | `"cluster-admin"` | Set name of the Cluster Role with limited permissions from you cluster for example - clusterRoleName: user-ro |
+| upstream.clusterRoleBinding.annotations | object | `{}` | Annotations to add to the cluster role binding |
 
 ## Contributing
 

@@ -1,0 +1,13 @@
+{{- $rbac := .Values.bigbang.rbac | default dict -}}
+{{- range $b := ($rbac.clusterRoleBindings | default list) }}
+{{- range $s := ($b.subjects | default list) }}
+{{- if and (eq $s.kind "ServiceAccount") $s.name }}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ default $.Release.Name $s.name }}
+  namespace: {{ default $.Release.Namespace $s.namespace | quote }}
+---
+{{- end }}
+{{- end }}
+{{- end }}
