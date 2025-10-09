@@ -1,8 +1,8 @@
 apiVersion: v2
 name: headlamp
 description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
-version: 0.35.0-bb.2
-appVersion: 0.35.0
+version: 0.36.0-bb.0
+appVersion: 0.36.0
 type: application
 home: https://headlamp.dev/
 icon: https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/docs/headlamp_light.svg
@@ -21,18 +21,18 @@ sources:
   - https://github.com/kubernetes-sigs/headlamp
 annotations:
   bigbang.dev/applicationVersions: |
-    - Headlamp: 0.35.0
+    - Headlamp: 0.36.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find upstream chart's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
     - [Find upstream applications's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
   helm.sh/images: |
     - name: headlamp
-      image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.35.0
+      image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.36.0
     - name: kubectl
       image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.5
       condition: waitJob.enabled
     - name: kubectl-gluon
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.32.9  
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.5  
     - name: exporter
       condition: metrics.enabled
       image: registry1.dso.mil/ironbank/opensource/prometheus/blackbox_exporter:v0.27.0
@@ -42,10 +42,10 @@ annotations:
 dependencies:
   - name: headlamp
     alias: upstream
-    version: 0.35.0
+    version: 0.36.0
     repository: https://kubernetes-sigs.github.io/headlamp/
   - name: gluon
-    version: "0.9.1"
+    version: "0.9.3"
     repository: oci://registry1.dso.mil/bigbang
   - name: prometheus-blackbox-exporter
     repository: file://./deps/prometheus-blackbox-exporter
