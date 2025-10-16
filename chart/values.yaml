@@ -45,6 +45,7 @@ istio:
 networkPolicies:
   enabled: false
   controlPlaneCidr: 0.0.0.0/0
+  vpcCidr: 0.0.0.0/0
   ingressLabels:
     app: public-ingressgateway
     istio: ingressgateway
