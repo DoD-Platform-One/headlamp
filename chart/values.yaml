@@ -106,8 +106,6 @@ bbtests:
 
 waitJob:
   enabled: true
-  scripts:
-    image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.5
   permissions:
     apiGroups:
       - apps
@@ -121,25 +119,25 @@ waitJob:
 bigbang:
   rbac:
     enabled: false
-    clusterRoles: 
+    clusterRoles:
       - name: read-1
         create: true
-        rules: 
+        rules:
           - apiGroups:
               - ""
             resources:
               - namespaces
               - pods
               - nodes
-            verbs: 
-              - get 
+            verbs:
+              - get
               - list
               - watch
-                  
+
     clusterRoleBindings:
       - name: read-1
         roleRef: read-1
-        subjects: 
+        subjects:
           - kind: ServiceAccount
             name: dev-sa
             namespace:
@@ -172,8 +170,8 @@ upstream:
         - ALL
 
   service:
-    port: 4466 
-    
+    port: 4466
+
   clusterRoleBinding:
     # -- Specified whether a cluster role binding should be created
     create: true
@@ -181,4 +179,4 @@ upstream:
     # for example - clusterRoleName: user-ro
     clusterRoleName: cluster-admin
     # -- Annotations to add to the cluster role binding
-    annotations: {}    
+    annotations: {}
