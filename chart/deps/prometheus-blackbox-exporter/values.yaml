@@ -448,7 +448,7 @@ configReloader:
   image:
     registry: registry1.dso.mil
     repository: /ironbank/opensource/prometheus-operator/prometheus-config-reloader
-    tag: "v0.85.0"
+    tag: "v0.86.1"
     pullPolicy: IfNotPresent
     digest: ""
   securityContext:
