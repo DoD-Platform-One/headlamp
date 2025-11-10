@@ -3,6 +3,13 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
+## [0.37.0-bb.0] (2025-11-07)
+
+### Updated
+- Updated registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp (source) v0.36.0 -> v0.37.0
+- Updated registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp (source) 0.36.0 -> 0.37.0
+- Updated cypress (source) 15.5.0 -> 15.6.0
+
 ## [0.36.0-bb.5] (2025-10-30)
 
 ### Updated
