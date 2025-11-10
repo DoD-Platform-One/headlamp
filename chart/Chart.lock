@@ -1,12 +1,12 @@
 dependencies:
 - name: headlamp
   repository: https://kubernetes-sigs.github.io/headlamp/
-  version: 0.36.0
+  version: 0.37.0
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
   version: 0.9.6
 - name: prometheus-blackbox-exporter
   repository: file://./deps/prometheus-blackbox-exporter
   version: 9.5.0
-digest: sha256:66ee938b8ae9fc85b683c25f33aacf68cd384aa3c5febccce68a25742d01baec
-generated: "2025-10-30T06:09:28.683524542Z"
+digest: sha256:e159fc9e3bae6abb21f042ff85f85fb485ec56d1c26aeae034a9af1b2658da78
+generated: "2025-11-01T06:08:39.969650296Z"
