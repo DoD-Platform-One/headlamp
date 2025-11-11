@@ -1,8 +1,8 @@
-{{- if and .Values.networkPolicies.enabled .Values.monitoring.enabled .Values.metrics.enabled }}
+{{- if and .Values.networkPolicies.enabled .Values.monitoring.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-metric-scraping
+  name: allow-blackbox-to-headlamp
   namespace: "{{ .Release.Namespace }}"
 spec:
   ingress:
@@ -12,13 +12,13 @@ spec:
                 app.kubernetes.io/name: monitoring
           podSelector:
             matchLabels:
-              app: prometheus
+              app.kubernetes.io/name: prometheus-blackbox-exporter
       ports:
-        - port: 9115
+        - port: 4466
           protocol: TCP
   podSelector:
     matchLabels:
-      app.kubernetes.io/name: metrics
+      app.kubernetes.io/name: headlamp
       app.kubernetes.io/instance: {{ .Release.Name }}
   policyTypes:
     - Ingress
