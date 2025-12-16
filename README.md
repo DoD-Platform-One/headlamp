@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.37.0-bb.1](https://img.shields.io/badge/Version-0.37.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.37.0](https://img.shields.io/badge/AppVersion-0.37.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.38.0-bb.0](https://img.shields.io/badge/Version-0.38.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.38.0](https://img.shields.io/badge/AppVersion-0.38.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -90,7 +90,7 @@ helm install headlamp chart/
 | upstream.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.image.repository | string | `"ironbank/opensource/headlamp-k8s/headlamp"` |  |
 | upstream.image.pullPolicy | string | `"Always"` |  |
-| upstream.image.tag | string | `"v0.37.0"` |  |
+| upstream.image.tag | string | `"v0.38.0"` |  |
 | upstream.image.pullSecrets[0] | string | `"private-registry"` |  |
 | upstream.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | upstream.nameOverride | string | `"headlamp"` |  |
