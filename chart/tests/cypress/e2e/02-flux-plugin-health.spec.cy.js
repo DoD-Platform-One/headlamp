@@ -1,9 +1,10 @@
 describe("Flux Plugin Check", function () {
   it("Check Flux Plugin is installed", function () {
-    cy.visit(Cypress.env("url"), { timeout: 15000 });
-
-    cy.request("GET", "/plugins").then((response) => {
-      assert.isTrue(response.body.includes("static-plugins/flux"));
+    cy.request("GET", Cypress.env("url") + '/plugins', { timeout: 15000 }).then((response) => {
+        
+        // Check for the flux plugin
+        const responseString = JSON.stringify(response.body);
+        expect(responseString).to.include('static-plugins/flux');
     });
   });
 });

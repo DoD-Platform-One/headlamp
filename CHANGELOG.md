@@ -4,6 +4,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 ---
 
+## [0.38.0-bb.0] (2025-11-24)
+
+### Updated
+
+- Updated registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp (source) v0.37.0 -> v0.38.0
+- Updated registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp (source) 0.37.0 -> 0.38.0
+- Updated registry1.dso.mil/ironbank/opensource/kubernetes/kubectl (source) v1.33.5 -> v1.33.6
+- Updated cypress (source) 15.6.0 -> 15.7.0
+
 ## [0.37.0-bb.1] (2025-11-11)
 
 ### Removed
