@@ -1,3 +1,5 @@
+alloy:
+  enabled: false
 grafana:
   enabled: false
 kiali:
@@ -19,17 +21,12 @@ monitoring:
 istioGateway:
   enabled: true
 
-packages:
+addons:
   headlamp:
     enabled: true
-    wrapper:
-      enabled: false
     git:
-      repo: https://repo1.dso.mil/big-bang/apps/sandbox/headlamp.git
-      #path: chart
-      tag: null #0.9.18-bb.4
-      branch: "main"
-      #branch: "test-istio-enable2"
+      tag: null 
+      branch: "renovate/ironbank"
     istio:
       enabled: true
     values:

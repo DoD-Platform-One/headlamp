@@ -105,7 +105,7 @@ This will deploy the headlamp for testing.
 
 To access Headlamp UI dashboard a token is needed for access. Run this command to generate a token for access.
 ```
-kubectl create token headlamp -n headlamp
+kubectl create token headlamp-headlamp -n headlamp
 ```
 
 ## Test Values Yaml / Validation
