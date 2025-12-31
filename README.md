@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.39.0-bb.0](https://img.shields.io/badge/Version-0.39.0--bb.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.39.0](https://img.shields.io/badge/AppVersion-0.39.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.39.0-bb.1](https://img.shields.io/badge/Version-0.39.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.39.0](https://img.shields.io/badge/AppVersion-0.39.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -44,19 +44,11 @@ helm install headlamp chart/
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| istio | object | Istio disabled | Istio configuration; see bb-common istio docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/istio?ref_type=heads |
+| networkPolicies | object | Basic configuration necessary for headlamp to function standalone. | Network Policy configuration; see bb-common network policy docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/network-policies?ref_type=heads |
+| routes | object | `{}` | Routes configuration; see bb-common routes docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/routes?ref_type=heads |
 | domain | string | `"dev.bigbang.mil"` | Domain used for BigBang created exposed services |
 | global.imagePullSecrets[0].name | string | `"private-registry"` |  |
-| istio.enabled | bool | `false` |  |
-| istio.hardened | object | `{"customAuthorizationPolicies":[],"customServiceEntries":[],"enabled":false,"outboundTrafficPolicyMode":"REGISTRY_ONLY"}` | Default peer authentication values |
-| istio.mtls.mode | string | `"STRICT"` | STRICT = Allow only mutual TLS traffic, PERMISSIVE = Allow both plain text and mutual TLS traffic |
-| istio.headlamp | object | `{"annotations":{},"enabled":true,"gateways":["istio-system/public"],"hosts":["headlamp.{{ .Values.domain }}"],"labels":{}}` | Headlamp UI specific VirtualService values |
-| istio.headlamp.enabled | bool | `true` | Toggle VirtualService creation |
-| networkPolicies.enabled | bool | `false` |  |
-| networkPolicies.controlPlaneCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.vpcCidr | string | `"0.0.0.0/0"` |  |
-| networkPolicies.ingressLabels.app | string | `"public-ingressgateway"` |  |
-| networkPolicies.ingressLabels.istio | string | `"ingressgateway"` |  |
-| networkPolicies.additionalPolicies | list | `[]` |  |
 | openshift | bool | `false` |  |
 | monitoring | object | `{"enabled":false,"serviceMonitor":{"scheme":"","tlsConfig":{}}}` | Monitoring toggle, affects servicemonitor and networkPolicies |
 | bbtests.enabled | bool | `false` |  |
