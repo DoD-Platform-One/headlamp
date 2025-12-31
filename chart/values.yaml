@@ -1,3 +1,22 @@
+# -- Istio configuration; see bb-common istio docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/istio?ref_type=heads
+# @default -- Istio disabled
+istio:
+  enabled: false
+
+# -- Network Policy configuration; see bb-common network policy docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/network-policies?ref_type=heads
+# @default -- Basic configuration necessary for headlamp to function standalone.
+networkPolicies:
+  enabled: false
+  egress:
+    from:
+      headlamp:
+        to:
+          definition:
+            kubeAPI: true
+
+# -- Routes configuration; see bb-common routes docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/routes?ref_type=heads
+routes: {}
+
 # -- Domain used for BigBang created exposed services
 domain: dev.bigbang.mil
 
@@ -5,51 +24,6 @@ global:
   imagePullSecrets:
     - name: private-registry
 
-istio:
-  enabled: false
-  # -- Default peer authentication values
-  hardened:
-    enabled: false
-    outboundTrafficPolicyMode: "REGISTRY_ONLY"
-    customServiceEntries: []
-      # - name: "allow-google"
-      #   enabled: true
-      #   spec:
-      #     hosts:
-      #       - google.com
-      #     location: MESH_EXTERNAL
-      #     ports:
-      #       - number: 443
-      #         protocol: TLS
-      #         name: https
-      #     resolution: DNS
-    customAuthorizationPolicies: []
-    # - name: "allow-nothing"
-    #   enabled: true
-    #   spec: {}
-  mtls:
-    # -- STRICT = Allow only mutual TLS traffic,
-    # PERMISSIVE = Allow both plain text and mutual TLS traffic
-    mode: STRICT
-  # -- Headlamp UI specific VirtualService values
-  headlamp:
-    # -- Toggle VirtualService creation
-    enabled: true
-    annotations: {}
-    labels: {}
-    gateways:
-      - istio-system/public
-    hosts:
-      - headlamp.{{ .Values.domain }}
-
-networkPolicies:
-  enabled: false
-  controlPlaneCidr: 0.0.0.0/0
-  vpcCidr: 0.0.0.0/0
-  ingressLabels:
-    app: public-ingressgateway
-    istio: ingressgateway
-  additionalPolicies: []
 
 # Toggles networkpolicy needed for openshift
 openshift: false
