@@ -1,7 +1,7 @@
 <!-- Warning: Do not manually edit this file. See notes on gluon + helm-docs at the end of this file for more information. -->
 # headlamp
 
-![Version: 0.39.0-bb.1](https://img.shields.io/badge/Version-0.39.0--bb.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.39.0](https://img.shields.io/badge/AppVersion-0.39.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
+![Version: 0.39.0-bb.2](https://img.shields.io/badge/Version-0.39.0--bb.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.39.0](https://img.shields.io/badge/AppVersion-0.39.0-informational?style=flat-square) ![Maintenance Track: unknown](https://img.shields.io/badge/Maintenance_Track-unknown-red?style=flat-square)
 
 Headlamp is an easy-to-use and extensible Kubernetes web UI.
 
@@ -46,7 +46,8 @@ helm install headlamp chart/
 |-----|------|---------|-------------|
 | istio | object | Istio disabled | Istio configuration; see bb-common istio docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/istio?ref_type=heads |
 | networkPolicies | object | Basic configuration necessary for headlamp to function standalone. | Network Policy configuration; see bb-common network policy docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/network-policies?ref_type=heads |
-| routes | object | `{}` | Routes configuration; see bb-common routes docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/routes?ref_type=heads |
+| routes | object | Routes disabled, Big Bang umbrella chart configures these when deployed with Istio | Routes configuration; see bb-common routes docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/routes?ref_type=heads |
+| routes.outbound | object | `{"sso":{"enabled":false,"hosts":[]}}` | Outbound routes for external service access (e.g., SSO/Keycloak) Big Bang umbrella chart configures these when SSO is enabled |
 | domain | string | `"dev.bigbang.mil"` | Domain used for BigBang created exposed services |
 | global.imagePullSecrets[0].name | string | `"private-registry"` |  |
 | openshift | bool | `false` |  |
@@ -64,21 +65,10 @@ helm install headlamp chart/
 | waitJob.permissions.verbs[0] | string | `"get"` |  |
 | waitJob.permissions.verbs[1] | string | `"list"` |  |
 | waitJob.permissions.verbs[2] | string | `"watch"` |  |
-| bigbang.rbac.enabled | bool | `false` |  |
-| bigbang.rbac.clusterRoles[0].name | string | `"read-1"` |  |
-| bigbang.rbac.clusterRoles[0].create | bool | `true` |  |
-| bigbang.rbac.clusterRoles[0].rules[0].apiGroups[0] | string | `""` |  |
-| bigbang.rbac.clusterRoles[0].rules[0].resources[0] | string | `"namespaces"` |  |
-| bigbang.rbac.clusterRoles[0].rules[0].resources[1] | string | `"pods"` |  |
-| bigbang.rbac.clusterRoles[0].rules[0].resources[2] | string | `"nodes"` |  |
-| bigbang.rbac.clusterRoles[0].rules[0].verbs[0] | string | `"get"` |  |
-| bigbang.rbac.clusterRoles[0].rules[0].verbs[1] | string | `"list"` |  |
-| bigbang.rbac.clusterRoles[0].rules[0].verbs[2] | string | `"watch"` |  |
-| bigbang.rbac.clusterRoleBindings[0].name | string | `"read-1"` |  |
-| bigbang.rbac.clusterRoleBindings[0].roleRef | string | `"read-1"` |  |
-| bigbang.rbac.clusterRoleBindings[0].subjects[0].kind | string | `"ServiceAccount"` |  |
-| bigbang.rbac.clusterRoleBindings[0].subjects[0].name | string | `"dev-sa"` |  |
-| bigbang.rbac.clusterRoleBindings[0].subjects[0].namespace | string | `nil` |  |
+| bigbang | object | RBAC disabled, uses upstream chart's default cluster-admin binding | BigBang RBAC configuration for Headlamp This section creates ClusterRoles and ClusterRoleBindings for controlling access. For SSO/Keycloak integration, bind to Groups that match Keycloak group names. See docs/keycloak.md and docs/RBAC.md for detailed configuration instructions. |
+| bigbang.rbac.enabled | bool | `false` | Enable BigBang RBAC management |
+| bigbang.rbac.clusterRoles | list | `[{"create":true,"name":"headlamp-readonly","rules":[{"apiGroups":[""],"resources":["namespaces","pods","pods/log","services","configmaps","events","nodes","persistentvolumeclaims","persistentvolumes"],"verbs":["get","list","watch"]},{"apiGroups":["apps"],"resources":["deployments","daemonsets","replicasets","statefulsets"],"verbs":["get","list","watch"]},{"apiGroups":["batch"],"resources":["jobs","cronjobs"],"verbs":["get","list","watch"]},{"apiGroups":["networking.k8s.io"],"resources":["ingresses","networkpolicies"],"verbs":["get","list","watch"]}]}]` | ClusterRoles to create Each role defines a set of permissions that can be bound to users, groups, or service accounts |
+| bigbang.rbac.clusterRoleBindings | list | `[{"name":"headlamp-sa-readonly","roleRef":"headlamp-readonly","subjects":[{"kind":"ServiceAccount","name":"dev-sa","namespace":"headlamp"}]}]` | ClusterRoleBindings to create Binds ClusterRoles to subjects (Users, Groups, or ServiceAccounts) For Keycloak SSO, use kind: Group with the Keycloak group name |
 | upstream.image.registry | string | `"registry1.dso.mil"` |  |
 | upstream.image.repository | string | `"ironbank/opensource/headlamp-k8s/headlamp"` |  |
 | upstream.image.pullPolicy | string | `"Always"` |  |
