@@ -1,0 +1,35 @@
+# Test case: SSO-enabled network policy configuration
+# This tests the Big Bang integration scenario where SSO egress is enabled
+networkPolicies:
+  enabled: true
+  egress:
+    definitions:
+      sso:
+        to:
+          - ipBlock:
+              cidr: 10.0.0.0/8
+    from:
+      headlamp:
+        to:
+          definition:
+            kubeAPI: true
+            sso: true
+
+# Outbound route for SSO ServiceEntry (bb-common routes.outbound pattern)
+routes:
+  outbound:
+    sso:
+      enabled: true
+      hosts:
+        - keycloak.example.com
+
+# OIDC configuration for SSO (using PKCE - no client secret needed)
+upstream:
+  config:
+    oidc:
+      secret:
+        create: false
+      clientID: "headlamp-sso-client"
+      issuerURL: "https://keycloak.example.com/auth/realms/test"
+      scopes: "email,profile"
+      usePKCE: true

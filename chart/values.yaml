@@ -8,14 +8,32 @@ istio:
 networkPolicies:
   enabled: false
   egress:
+    definitions:
+      sso:
+        to: []
     from:
       headlamp:
         to:
           definition:
             kubeAPI: true
+            sso: false
 
 # -- Routes configuration; see bb-common routes docs for details: https://repo1.dso.mil/big-bang/product/packages/bb-common/-/tree/main/docs/routes?ref_type=heads
-routes: {}
+# @default -- Routes disabled, Big Bang umbrella chart configures these when deployed with Istio
+routes:
+  inbound:
+    headlamp:
+      enabled: false
+      gateways: []
+      hosts: []
+      service: headlamp-headlamp
+      port: 4466
+  # -- Outbound routes for external service access (e.g., SSO/Keycloak)
+  # Big Bang umbrella chart configures these when SSO is enabled
+  outbound:
+    sso:
+      enabled: false
+      hosts: []
 
 # -- Domain used for BigBang created exposed services
 domain: dev.bigbang.mil
@@ -62,31 +80,78 @@ waitJob:
       - list
       - watch
 
+# -- BigBang RBAC configuration for Headlamp
+# This section creates ClusterRoles and ClusterRoleBindings for controlling access.
+# For SSO/Keycloak integration, bind to Groups that match Keycloak group names.
+# See docs/keycloak.md and docs/RBAC.md for detailed configuration instructions.
+# @default -- RBAC disabled, uses upstream chart's default cluster-admin binding
 bigbang:
   rbac:
+    # -- Enable BigBang RBAC management
     enabled: false
+
+    # -- ClusterRoles to create
+    # Each role defines a set of permissions that can be bound to users, groups, or service accounts
     clusterRoles:
-      - name: read-1
+      # Example: Read-only role for viewing cluster resources
+      - name: headlamp-readonly
         create: true
         rules:
-          - apiGroups:
-              - ""
+          - apiGroups: [""]
             resources:
               - namespaces
               - pods
+              - pods/log
+              - services
+              - configmaps
+              - events
               - nodes
-            verbs:
-              - get
-              - list
-              - watch
+              - persistentvolumeclaims
+              - persistentvolumes
+            verbs: ["get", "list", "watch"]
+          - apiGroups: ["apps"]
+            resources:
+              - deployments
+              - daemonsets
+              - replicasets
+              - statefulsets
+            verbs: ["get", "list", "watch"]
+          - apiGroups: ["batch"]
+            resources:
+              - jobs
+              - cronjobs
+            verbs: ["get", "list", "watch"]
+          - apiGroups: ["networking.k8s.io"]
+            resources:
+              - ingresses
+              - networkpolicies
+            verbs: ["get", "list", "watch"]
 
+    # -- ClusterRoleBindings to create
+    # Binds ClusterRoles to subjects (Users, Groups, or ServiceAccounts)
+    # For Keycloak SSO, use kind: Group with the Keycloak group name
     clusterRoleBindings:
-      - name: read-1
-        roleRef: read-1
+      # Example: Bind to a ServiceAccount (for token-based access)
+      - name: headlamp-sa-readonly
+        roleRef: headlamp-readonly
         subjects:
           - kind: ServiceAccount
             name: dev-sa
-            namespace:
+            namespace: headlamp
+      # Example: Bind to a Keycloak group (for SSO access)
+      # Uncomment and modify for your Keycloak groups
+      # - name: headlamp-keycloak-readonly
+      #   roleRef: headlamp-readonly
+      #   subjects:
+      #     - kind: Group
+      #       name: "headlamp-readers"  # Must match Keycloak group name exactly
+      #       apiGroup: rbac.authorization.k8s.io
+      # - name: headlamp-keycloak-admin
+      #   roleRef: cluster-admin  # Use built-in cluster-admin for full access
+      #   subjects:
+      #     - kind: Group
+      #       name: "headlamp-admins"
+      #       apiGroup: rbac.authorization.k8s.io
 
 upstream:
   image:

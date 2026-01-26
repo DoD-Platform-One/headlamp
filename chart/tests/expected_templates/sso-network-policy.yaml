@@ -1,0 +1,602 @@
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    generated.network-policies.bigbang.dev/from-definition: kubeAPI
+    generated.network-policies.bigbang.dev/local-key: headlamp
+    generated.network-policies.bigbang.dev/remote-key: kubeAPI
+  labels:
+    network-policies.bigbang.dev/direction: egress
+    network-policies.bigbang.dev/source: bb-common
+  name: allow-egress-from-headlamp-to-kubeapi
+  namespace: default
+spec:
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/8
+    - ipBlock:
+        cidr: 172.16.0.0/12
+    - ipBlock:
+        cidr: 192.168.0.0/16
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: headlamp
+  policyTypes:
+  - Egress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    generated.network-policies.bigbang.dev/from-definition: sso
+    generated.network-policies.bigbang.dev/local-key: headlamp
+    generated.network-policies.bigbang.dev/remote-key: sso
+  labels:
+    network-policies.bigbang.dev/direction: egress
+    network-policies.bigbang.dev/source: bb-common
+  name: allow-egress-from-headlamp-to-sso
+  namespace: default
+spec:
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.0.0.0/8
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: headlamp
+  policyTypes:
+  - Egress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policies.bigbang.dev/direction: egress
+    network-policies.bigbang.dev/source: bb-common
+  name: default-egress-deny-all
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policies.bigbang.dev/direction: egress
+    network-policies.bigbang.dev/source: bb-common
+  name: default-egress-allow-all-in-ns
+  namespace: default
+spec:
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: default
+  podSelector: {}
+  policyTypes:
+  - Egress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policies.bigbang.dev/direction: egress
+    network-policies.bigbang.dev/source: bb-common
+  name: default-egress-allow-kube-dns
+  namespace: default
+spec:
+  egress:
+  - ports:
+    - port: 53
+      protocol: UDP
+    - port: 53
+      protocol: TCP
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+  podSelector: {}
+  policyTypes:
+  - Egress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policies.bigbang.dev/direction: egress
+    network-policies.bigbang.dev/source: bb-common
+  name: default-egress-allow-istiod
+  namespace: default
+spec:
+  egress:
+  - ports:
+    - port: 15012
+      protocol: TCP
+    to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: istio-system
+      podSelector:
+        matchLabels:
+          app: istiod
+  podSelector: {}
+  policyTypes:
+  - Egress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policies.bigbang.dev/direction: ingress
+    network-policies.bigbang.dev/source: bb-common
+  name: default-ingress-deny-all
+  namespace: default
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policies.bigbang.dev/direction: ingress
+    network-policies.bigbang.dev/source: bb-common
+  name: default-ingress-allow-all-in-ns
+  namespace: default
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: default
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+# Source: headlamp/templates/bigbang/network-policies.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    network-policies.bigbang.dev/direction: ingress
+    network-policies.bigbang.dev/source: bb-common
+  name: default-ingress-allow-prometheus-to-istio-sidecar
+  namespace: default
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: monitoring
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: prometheus
+    ports:
+    - port: 15020
+      protocol: TCP
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+# Source: headlamp/charts/upstream/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: headlamp
+  namespace: default
+  labels:
+    helm.sh/chart: upstream-0.39.0
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/version: "0.39.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: headlamp/templates/bigbang/dev-sa.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dev-sa
+  namespace: "headlamp"
+---
+# Source: headlamp/charts/upstream/templates/clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: headlamp-admin
+  labels:
+    helm.sh/chart: upstream-0.39.0
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/version: "0.39.0"
+    app.kubernetes.io/managed-by: Helm
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: headlamp
+  namespace: default
+---
+# Source: headlamp/charts/upstream/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: headlamp
+  namespace: default
+  labels:
+    helm.sh/chart: upstream-0.39.0
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/version: "0.39.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: ClusterIP
+  
+  ports:
+    - port: 4466
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/instance: headlamp
+---
+# Source: headlamp/charts/upstream/templates/deployment.yaml
+# This block of code is used to extract the values from the env.
+# This is done to check if the values are non-empty and if they are, they are used in the deployment.yaml.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: headlamp
+  namespace: default
+  labels:
+    helm.sh/chart: upstream-0.39.0
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/version: "0.39.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: headlamp
+      app.kubernetes.io/instance: headlamp
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: headlamp
+        app.kubernetes.io/instance: headlamp
+    spec:
+      imagePullSecrets:
+        - name: private-registry
+      serviceAccountName: headlamp
+      automountServiceAccountToken: true
+      securityContext:
+        {}
+      containers:
+        - name: upstream
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+            privileged: false
+            runAsGroup: 101
+            runAsNonRoot: true
+            runAsUser: 100
+          image: "registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.39.0"
+          imagePullPolicy: Always
+          
+          env:
+            - name: OIDC_CLIENT_ID
+              value: headlamp-sso-client
+            - name: OIDC_ISSUER_URL
+              value: https://keycloak.example.com/auth/realms/test
+            - name: OIDC_SCOPES
+              value: email,profile
+            - name: OIDC_USE_PKCE
+              value: true
+          args:
+            - "-in-cluster"
+            - "-plugins-dir=/headlamp/plugins"
+            # Check if externalSecret is disabled
+            # Check if clientID is non empty either from env or oidc.config
+            - "-oidc-client-id=$(OIDC_CLIENT_ID)"
+            # Check if issuerURL is non empty either from env or oidc.config
+            - "-oidc-idp-issuer-url=$(OIDC_ISSUER_URL)"
+            # Check if scopes are non empty either from env or oidc.config
+            - "-oidc-scopes=$(OIDC_SCOPES)"
+            - "-oidc-use-pkce=$(OIDC_USE_PKCE)"
+          ports:
+            - name: http
+              containerPort: 4466
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: "/"
+              port: http
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: http
+          resources:
+            {}
+---
+# Source: headlamp/templates/bigbang/routes.yaml
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  annotations:
+    outbound.service-entries.generated.bigbang.dev/from-route-name: sso
+  labels:
+    service-entries.bigbang.dev/source: bb-common
+  name: sso-external
+  namespace: default
+spec:
+  hosts:
+  - keycloak.example.com
+  location: MESH_EXTERNAL
+  ports:
+  - name: https
+    number: 443
+    protocol: HTTPS
+  resolution: DNS
+---
+# Source: headlamp/templates/tests/test-wait-job.yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-egress-from-headlamp-wait-job-to-anywhere-any-port
+  namespace: default
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 169.254.169.254/32
+  podSelector:
+    matchLabels:
+      wait-job: enabled
+  policyTypes:
+    - Egress
+---
+# Source: headlamp/templates/tests/test-wait-job.yaml
+---
+apiVersion: v1
+automountServiceAccountToken: true
+kind: ServiceAccount
+metadata:
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation, hook-failed
+    helm.sh/hook-weight: "-5"
+  labels:
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/version: 0.39.0
+    helm.sh/chart: headlamp-0.39.0-bb.1
+  name: headlamp-wait-job-sa
+  namespace: default
+---
+# Source: headlamp/templates/tests/test-wait-job.yaml
+apiVersion: v1
+data:
+  wait.sh: "#!/bin/sh\n# interval and timeout are in seconds\ninterval=5\ntimeout=600\n#\nresourcename=headlamp\ncounter=0\n#
+    need to remove the default \"set -e\" to allow commands to return nonzero exit
+    codes without the script failing\nset +e\n\nwhile true; do\n   echo \"Checking
+    $resourcename status...\"\n   echo \"Waiting for $interval seconds...\"\n   sleep
+    $interval\n   \n   if [[ \"$(kubectl -n \"$resourcename\" get deployment -o jsonpath='{.items[0].status.conditions[?(@.type==\"Available\")].status}'
+    2>/dev/null)\" == \"True\" ]]; then\n      echo \"$resourcename custom resource
+    creation finished\"\n      break\n   fi\n\n   echo \"Waiting for $interval seconds...\"\n
+    \  sleep $interval\n\n   counter=$((counter + 1))\n   if ((counter * interval
+    >= timeout)); then\n      echo \"$resourcename timeout after $timeout seconds,
+    running describe...\" 1>&2\n      kubectl describe deploy \"$resourcename\" -n
+    \"$resourcename\" 1>&2\n      exit 1\n   fi\ndone\n\nset -e\n"
+kind: ConfigMap
+metadata:
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "-5"
+    sidecar.istio.io/inject: "false"
+  labels:
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/version: 0.39.0
+    helm.sh/chart: headlamp-0.39.0-bb.1
+    wait-job: enabled
+  name: headlamp-wait-script
+  namespace: default
+---
+# Source: headlamp/templates/tests/test-wait-job.yaml
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation, hook-failed
+    helm.sh/hook-weight: "-5"
+  labels:
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/version: 0.39.0
+    helm.sh/chart: headlamp-0.39.0-bb.1
+  name: headlamp-wait-job-role
+  namespace: default
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+---
+# Source: headlamp/templates/tests/test-wait-job.yaml
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation, hook-failed
+    helm.sh/hook-weight: "-5"
+  labels:
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/version: 0.39.0
+    helm.sh/chart: headlamp-0.39.0-bb.1
+  name: headlamp-wait-job-rolebinding
+  namespace: default
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: headlamp-wait-job-role
+subjects:
+- kind: ServiceAccount
+  name: headlamp-wait-job-sa
+  namespace: default
+---
+# Source: headlamp/templates/tests/test-wait-job.yaml
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-delete-policy: hook-succeeded,before-hook-creation,hook-failed
+    helm.sh/hook-weight: "10000"
+  labels:
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: headlamp
+    app.kubernetes.io/version: 0.39.0
+    helm.sh/chart: headlamp-0.39.0-bb.1
+  name: headlamp-wait-job
+  namespace: default
+spec:
+  template:
+    metadata:
+      labels:
+        wait-job: enabled
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          if [[ -d /src && -n "$(ls /src/* 2>/dev/null)" ]]; then
+            cp /src/* /wait/
+          fi
+          if [[ -n "$(ls . 2>/dev/null)" ]]; then
+            for script in *; do
+              if [[ -d ${script} ]]; then
+                continue;
+              fi
+              chmod +x ${script}
+              echo "---"
+              echo "Running ${script}..."
+              echo "---"
+              ./${script}
+            done
+          fi
+        env:
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: K8S_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34
+        imagePullPolicy: IfNotPresent
+        name: wait-job
+        resources:
+          limits:
+            cpu: 0.5
+            memory: 128Mi
+          requests:
+            cpu: 0.5
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /wait
+          name: workdir
+        - mountPath: /src
+          name: wait-scripts
+        workingDir: /wait
+      imagePullSecrets:
+      - name: private-registry
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - |
+          attempts=0
+          until kubectl auth can-i --list --namespace $K8S_NAMESPACE > /dev/null; do
+            attempts=$((attempts+1))
+            if [ $attempts -ge 10 ]; then
+              echo "Network is unreachable after 10 attempts, exiting."
+              exit 1
+            fi
+            echo "Network is unreachable, retrying in 6 seconds..."
+            sleep 6
+          done
+        env:
+        - name: K8S_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34
+        imagePullPolicy: IfNotPresent
+        name: network-wait-online
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+      restartPolicy: Never
+      securityContext:
+        runAsGroup: 1000
+        runAsNonRoot: true
+        runAsUser: 1000
+      serviceAccountName: headlamp-wait-job-sa
+      volumes:
+      - emptyDir: {}
+        name: workdir
+      - configMap:
+          name: headlamp-wait-script
+        name: wait-scripts
