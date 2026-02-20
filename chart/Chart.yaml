@@ -1,8 +1,8 @@
 apiVersion: v2
 name: headlamp
 description: Headlamp is an easy-to-use and extensible Kubernetes web UI.
-version: 0.39.0-bb.2
-appVersion: 0.39.0
+version: 0.40.0-bb.0
+appVersion: 0.40.0
 type: application
 home: https://headlamp.dev/
 icon: https://raw.githubusercontent.com/headlamp-k8s/headlamp/main/docs/headlamp_light.svg
@@ -21,26 +21,26 @@ sources:
   - https://github.com/kubernetes-sigs/headlamp
 annotations:
   bigbang.dev/applicationVersions: |
-    - Headlamp: 0.39.0
+    - Headlamp: 0.40.0
   bigbang.dev/upstreamReleaseNotesMarkdown: |
     - [Find upstream chart's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
     - [Find upstream applications's release notes and CHANGELOG here](https://github.com/headlamp-k8s/headlamp/releases/)
   helm.sh/images: |
     - name: headlamp
-      image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.39.0
+      image: registry1.dso.mil/ironbank/opensource/headlamp-k8s/headlamp:v0.40.0
     - name: kubectl
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34
       condition: waitJob.enabled
     - name: kubectl-gluon
-      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.33.6
+      image: registry1.dso.mil/ironbank/opensource/kubernetes/kubectl:v1.34.3
 dependencies:
   - name: headlamp
     alias: upstream
-    version: 0.39.0
+    version: 0.40.0
     repository: https://kubernetes-sigs.github.io/headlamp/
   - name: gluon
-    version: "0.9.7"
+    version: "0.9.8"
     repository: oci://registry1.dso.mil/bigbang
   - name: bb-common
-    version: 0.12.0
+    version: 0.14.0
     repository: oci://registry1.dso.mil/bigbang
