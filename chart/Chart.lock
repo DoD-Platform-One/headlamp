@@ -1,12 +1,12 @@
 dependencies:
 - name: headlamp
   repository: https://kubernetes-sigs.github.io/headlamp/
-  version: 0.39.0
+  version: 0.40.0
 - name: gluon
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.9.7
+  version: 0.9.8
 - name: bb-common
   repository: oci://registry1.dso.mil/bigbang
-  version: 0.12.0
-digest: sha256:74567d35458c6656d2358609d549812a2f685454e455d37bd272628cba484d48
-generated: "2025-12-29T15:30:35.390988635-06:00"
+  version: 0.14.0
+digest: sha256:4fe22db3f5e62193e0851e1db617c4f6bb301cd8b670da3e59254c03c69b7fcb
+generated: "2026-02-10T07:15:04.779253494Z"
