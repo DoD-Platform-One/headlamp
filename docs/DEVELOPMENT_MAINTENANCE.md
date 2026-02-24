@@ -52,7 +52,7 @@ Always make sure your local bigbang repo is current before deploying.
 export REGISTRY_USERNAME='<your_username>'
 export REGISTRY_PASSWORD='<your_password>'
 ```
-2. xport the path to your local bigbang repo (without a trailing /):
+2. Export the path to your local bigbang repo (without a trailing /):
  Note that wrapping your file path in quotes when exporting will break expansion of ~.
 
  ```
@@ -144,7 +144,7 @@ When in doubt with any testing or upgrade steps ask one of the CODEOWNERS for as
 
 As part of your MR that modifies bigbang packages, you should modify the bigbang  [bigbang/tests/test-values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/tests/test-values.yaml?ref_type=heads) against your branch for the CI/CD MR testing by enabling your packages.
 
-    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Headlamp enabled (reference check the code above (Branch/Tag Config step), actual changes could be more depending on what changes where made to Headlamp in the pakcage MR).
+    - To do this, at a minimum, you will need to follow the instructions at [bigbang/docs/developer/test-package-against-bb.md](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/docs/developer/test-package-against-bb.md?ref_type=heads) with changes for Headlamp enabled (reference check the code above (Branch/Tag Config step), actual changes could be more depending on what changes were made to Headlamp in the package MR).
 
 ### automountServiceAccountToken
 The mutating Kyverno policy named `update-automountserviceaccounttokens` is leveraged to harden all ServiceAccounts in this package with `automountServiceAccountToken: false`. This policy is configured by namespace in the Big Bang umbrella chart repository at [chart/templates/kyverno-policies/values.yaml](https://repo1.dso.mil/big-bang/bigbang/-/blob/master/chart/templates/kyverno-policies/values.yaml?ref_type=heads).
